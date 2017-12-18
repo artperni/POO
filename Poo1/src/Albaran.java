@@ -1,4 +1,4 @@
-package practicapoo;
+
 import java.util.*;
 
 public class Albaran {
