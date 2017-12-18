@@ -9,6 +9,7 @@ public class Albaran {
     private ArrayList <Producto> listaCompra;
     private double importeTotal;
     private Cliente cliente;
+    private int numero6;
 
     public Albaran(Date fechaCompra, int numero, ArrayList<Producto> listaCompra,  Cliente cliente) {
         this.fechaCompra = fechaCompra;
