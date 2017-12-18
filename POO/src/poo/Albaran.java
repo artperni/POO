@@ -69,7 +69,8 @@ public class Albaran {
     }
     
     
-    
+    añadido
+            
     
     
     
