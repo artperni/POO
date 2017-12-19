@@ -96,6 +96,36 @@ public class Producto {
                 "\tPrecio: "+this.precioVenta+"€";
     }
 
+    
+    
+    
+    
+    public boolean isCaducado(Calendar ahora){
+        return ahora.after(this.fechaCaducidad);
+    }
+    
+    public boolean isCaducado(){
+        Calendar fechaActual = Calendar.getInstance();
+        return isCaducado(fechaActual);
+    }
+    
+    public boolean isCaducado(int dias){
+        Calendar fechaActual = Calendar.getInstance();
+        fechaActual.set(Calendar.DAY_OF_MONTH, dias);//Damos unos días de margen a elección
+        return isCaducado(fechaActual);
+    }
+    
+    public boolean isLibre(){
+        return this.estado.name().equals("libre");
+    }
+    
+    public boolean isVendido(){
+           return this.estado.name().equals("vendido");
+    }
+    
+    public boolean isReservado(){
+           return this.estado.name().equals("reservado");
+    }
 
     
     

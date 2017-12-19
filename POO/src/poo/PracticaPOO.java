@@ -74,7 +74,7 @@ public class PracticaPOO {
         almacen.listaProductos.add(p2);
         lista1.add(p1);
         lista1.add(p2);
-        Albaran alb=new Albaran(new Date("2017/07/28"), 1, lista1, cli1);
+        Albaran alb=new Albaran(1, lista1, cli1);
         System.out.println(alb.toString());
         /*Ejemplo*/
         

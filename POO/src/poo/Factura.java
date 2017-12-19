@@ -2,19 +2,22 @@ package poo;
 
 
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 public class Factura extends Albaran {
     private String observaciones;
     private FormaPago formaPago;
     private boolean estadoFactura=false;
 
-    public Factura(String observaciones, FormaPago formaPago, Date fechaCompra, int numero, ArrayList<Producto> listaCompra, double importeTotal, Cliente cliente) {
-        super(fechaCompra, numero, listaCompra, cliente);
+    //Tengamos en cuenta que no podemos crear una factura si no hay un albarán previo
+    public Factura(String observaciones, FormaPago formaPago) {
+        Calendar now = Calendar.getInstance();
+        super.setFecha(now.getTime());
         this.observaciones = observaciones;
         this.formaPago = formaPago;
     }
+
+    
     
 
     public String getObservaciones() {
@@ -40,8 +43,11 @@ public class Factura extends Albaran {
     public void setEstadoFactura(boolean estadoFactura) {
         this.estadoFactura = estadoFactura;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

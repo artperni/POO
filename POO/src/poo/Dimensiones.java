@@ -13,7 +13,7 @@ public class Dimensiones {
 
     @Override
     public String toString() {
-        return "Dimensiones: "+this.ancho+"x"+this.altura;
+        return this.ancho+"x"+this.altura;
     }
     
     

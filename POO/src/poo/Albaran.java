@@ -4,15 +4,22 @@ package poo;
 import java.util.*;
 
 public class Albaran {
-    private Date fechaCompra;
+    private Date fecha;
     private int numero;
     private ArrayList <Producto> listaCompra;
     private double importeTotal;
     private Cliente cliente;
 
+    
+    
+    public Albaran() {
+        Calendar now = Calendar.getInstance();
+        this.fecha = now.getTime();
+    }
 
-    public Albaran(Date fechaCompra, int numero, ArrayList<Producto> listaCompra,  Cliente cliente) {
-        this.fechaCompra = fechaCompra;
+    public Albaran(int numero, ArrayList<Producto> listaCompra,  Cliente cliente){
+        Calendar now = Calendar.getInstance();
+        this.fecha = now.getTime();
         this.numero = numero;
         this.listaCompra = listaCompra;
         this.cliente = cliente;
@@ -23,7 +30,7 @@ public class Albaran {
     
     
     public Date getFechaCompra() {
-        return fechaCompra;
+        return fecha;
     }
 
     public int getNumero() {
@@ -42,8 +49,8 @@ public class Albaran {
         return cliente;
     }
 
-    public void setFechaCompra(Date fechaCompra) {
-        this.fechaCompra = fechaCompra;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public void setNumero(int numero) {
@@ -64,13 +71,10 @@ public class Albaran {
 
     @Override
     public String toString() {
-        return "Fecha de compra del producto: "+this.fechaCompra+"\nNúmero de albarán: "+this.numero+
+        return "Fecha de creación del albarám: "+this.fecha+"\nNúmero de albarán: "+this.numero+
                 "\nLista de productos: "+this.listaCompra.toString()+"\nImporte total: "+this.importeTotal+
                 "\nCliente asociado: "+this.cliente.toString();
     }
-    
-    
-            
     
     
     
