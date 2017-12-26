@@ -111,9 +111,10 @@ public class Almacen {
         Albaran albaran = new Albaran();
         
         
-        
-        
-        
+        /*for (Producto producto : albaran){
+            
+            Listar.totalVendido = Listar.totalVendido + producto.getPrecioVenta();
+        }*/
     }
     
     

@@ -4,7 +4,7 @@ package poo;
 import java.util.*;
 
 public class Albaran {
-    private Date fecha;
+    private Calendar fecha;
     private int numero;
     private ArrayList <Producto> listaCompra;
     private double importeTotal;
@@ -14,22 +14,24 @@ public class Albaran {
     
     public Albaran() {
         Calendar now = Calendar.getInstance();
-        this.fecha = now.getTime();
+        this.fecha = now;
+        Listar.listaAlbaranes.add(this);
     }
 
     public Albaran(int numero, ArrayList<Producto> listaCompra,  Cliente cliente){
         Calendar now = Calendar.getInstance();
-        this.fecha = now.getTime();
+        this.fecha = now;
         this.numero = numero;
         this.listaCompra = listaCompra;
         this.cliente = cliente;
         for(Producto producto : listaCompra){
             this.importeTotal+=producto.getPrecioVenta();
         }
+        Listar.listaAlbaranes.add(this);
     }
     
     
-    public Date getFechaCompra() {
+    public Calendar getFechaCompra() {
         return fecha;
     }
 
@@ -49,7 +51,7 @@ public class Albaran {
         return cliente;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
 

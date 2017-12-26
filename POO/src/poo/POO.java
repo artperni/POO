@@ -4,7 +4,7 @@ package poo;
 
 import java.util.*;
 
-public class PracticaPOO {
+public class POO {
 
     public static void main(String[] args) {
         /*
@@ -60,21 +60,25 @@ public class PracticaPOO {
                 */
                 
         /*Ejemplo*/
+        Listar lista = Listar.getIntancia();
+        Calendar cal = Calendar.getInstance();
         Almacen almacen = new Almacen();
-        ArrayList <Producto> lista1=new ArrayList <> ();
+        ArrayList <Producto> listaPrueba=new ArrayList <> ();
         Cliente cli1 = new Cliente("Alejandro Maestro", "48576822Y", "Calle Pelícano nº7", 1500.5);
         System.out.println(cli1.toString());
         
-        Producto p1=new Producto("SE001", 1, new Dimensiones(47.39, 20.78), Estado.libre, 513.50, 51.70, new Date("2028/12/25"));
+        cal.set(2028, 12, 25);
+        Producto p1=new Producto("SE001", 1, new Dimensiones(47.39, 20.78), Estado.libre, 513.50, 51.70, cal);
         System.out.println(p1.toString());
         
-        Producto p2=new Producto("ST002", 2, new Dimensiones(18.74, 49.31), Estado.reservado, 10.50, 0.70, new Date("2071/1/8"));
+        cal.set(2071, 1, 8);
+        Producto p2=new Producto("ST002", 2, new Dimensiones(18.74, 49.31), Estado.reservado, 10.50, 0.70, cal);
         
         almacen.listaProductos.add(p1);
         almacen.listaProductos.add(p2);
-        lista1.add(p1);
-        lista1.add(p2);
-        Albaran alb=new Albaran(1, lista1, cli1);
+        listaPrueba.add(p1);
+        listaPrueba.add(p2);
+        Albaran alb=new Albaran(1, listaPrueba, cli1);
         System.out.println(alb.toString());
         /*Ejemplo*/
         

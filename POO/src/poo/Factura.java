@@ -12,9 +12,10 @@ public class Factura extends Albaran {
     //Tengamos en cuenta que no podemos crear una factura si no hay un albarán previo
     public Factura(String observaciones, FormaPago formaPago) {
         Calendar now = Calendar.getInstance();
-        super.setFecha(now.getTime());
+        super.setFecha(now);
         this.observaciones = observaciones;
         this.formaPago = formaPago;
+        Listar.listaFacturas.add(this);
     }
 
     
@@ -46,7 +47,14 @@ public class Factura extends Albaran {
 
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        String estadoFac;
+        if (isEstadoFactura())
+            estadoFac="Pagada";
+        else
+            estadoFac="No pagada";
+        return super.toString()+"\nObservaciones: "+this.observaciones+
+                "\nForma de pago: "+this.formaPago.toString()+"Estado de la factura: "+
+                estadoFac;
     }
     
     

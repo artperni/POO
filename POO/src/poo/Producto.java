@@ -11,12 +11,12 @@ public class Producto {
     private Estado estado;
     private double precioCompra;
     private double descuento;
-    private Date fechaCaducidad;
+    private Calendar fechaCaducidad;
     private final double precioVenta;
     
     
     
-    public Producto(String referencia, int stock, Dimensiones dimensiones, Estado estado, double precioCompra, double descuento, Date fechaCaducidad) {
+    public Producto(String referencia, int stock, Dimensiones dimensiones, Estado estado, double precioCompra, double descuento, Calendar fechaCaducidad) {
         this.referencia = referencia;
         this.stock = stock;
         this.dimensiones = dimensiones;
@@ -25,6 +25,7 @@ public class Producto {
         this.descuento = descuento;
         this.fechaCaducidad = fechaCaducidad;
         this.precioVenta = precioCompra+precioCompra/2-descuento;
+        Listar.listaProductosTotal.add(this);
     }
     
 
@@ -56,7 +57,7 @@ public class Producto {
         return descuento;
     }
 
-    public Date getFechaCaducidad() {
+    public Calendar getFechaCaducidad() {
         return fechaCaducidad;
     }
 
@@ -84,7 +85,7 @@ public class Producto {
         this.descuento = descuento;
     }
 
-    public void setFechaCaducidad(Date fechaCaducidad) {
+    public void setFechaCaducidad(Calendar fechaCaducidad) {
         this.fechaCaducidad = fechaCaducidad;
     }
 
