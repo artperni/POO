@@ -8,19 +8,21 @@ public class Factura extends Albaran {
     private String observaciones;
     private FormaPago formaPago;
     private boolean estadoFactura=false;
+    private Calendar fechaFactura;
 
     //Tengamos en cuenta que no podemos crear una factura si no hay un albarán previo
-    public Factura(String observaciones, FormaPago formaPago) {
+    public Factura(String observaciones, FormaPago formaPago, ArrayList<Producto> listaCompra, Cliente cliente) {
+        super(listaCompra, cliente);
         Calendar now = Calendar.getInstance();
-        super.setFecha(now);
+        this.fechaFactura = now;
         this.observaciones = observaciones;
         this.formaPago = formaPago;
         Listar.listaFacturas.add(this);
     }
-
     
     
-
+    
+    
     public String getObservaciones() {
         return observaciones;
     }
@@ -31,6 +33,10 @@ public class Factura extends Albaran {
 
     public boolean isEstadoFactura() {
         return estadoFactura;
+    }
+
+    public Calendar getFechaFactura() {
+        return fechaFactura;
     }
 
     public void setObservaciones(String observaciones) {
@@ -45,6 +51,12 @@ public class Factura extends Albaran {
         this.estadoFactura = estadoFactura;
     }
 
+    public void setFechaFactura(Calendar fechaFactura) {
+        this.fechaFactura = fechaFactura;
+    }
+    
+    
+
     @Override
     public String toString() {
         String estadoFac;
@@ -52,11 +64,11 @@ public class Factura extends Albaran {
             estadoFac="Pagada";
         else
             estadoFac="No pagada";
-        return super.toString()+"\nObservaciones: "+this.observaciones+
-                "\nForma de pago: "+this.formaPago.toString()+"Estado de la factura: "+
+        return super.toString()+"\nObservaciones: "+this.getObservaciones()+
+                "\nForma de pago: "+this.getFormaPago().toString()+"Estado de la factura: "+
                 estadoFac;
     }
-    
+
     
     
     

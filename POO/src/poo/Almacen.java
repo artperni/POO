@@ -86,29 +86,28 @@ public class Almacen {
         for (Producto producto : this.listaProductos){
             if(producto.isCaducado()){
                 this.listaProductos.remove(producto);
-                /*Empiezo a dudar acerca del stock de los productos.
-                Cada producto debería tener una lista de "elementos"
-                iguales entre sí en cuanto a dimensiones pero distintos en
-                estado y fecha de caducidad? Y así cuando eliminemos un producto 
-                caducado estaríamos eliminando un elemento de ese tipo y el 
-                stock de ese producto entonces sí tendría sentido que bajara en 1.*/
             }
         }
     }
     
-    public void anadir(Producto producto){
-        this.listaProductos.add(producto);
-        //Aquí se me plantea la misma duda
-        
-        
-        
-        
-        
-        
+    public void eliminar(Producto producto){
+        this.listaProductos.remove(producto);
     }
     
-    public void ventaProducto(int numeroCorrelativo){
-        Albaran albaran = new Albaran();
+    public void anadir(Producto producto){
+        this.listaProductos.add(producto);
+    }
+    
+    /*this es el almacen que contiene el producto a trasladar y
+    "almacen" es el almacen que contendrá en el futuro a "producto"*/
+    public void trasladar(Producto producto, Almacen almacen){
+        this.eliminar(producto);
+        almacen.anadir(producto);
+    }
+    
+    
+    public void vender(ArrayList <Producto> listaCompra, Cliente cliente){
+        Albaran albaran = new Albaran(listaCompra, cliente);
         
         
         /*for (Producto producto : albaran){
@@ -116,6 +115,5 @@ public class Almacen {
             Listar.totalVendido = Listar.totalVendido + producto.getPrecioVenta();
         }*/
     }
-    
     
 }

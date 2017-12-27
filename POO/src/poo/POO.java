@@ -78,7 +78,7 @@ public class POO {
         almacen.listaProductos.add(p2);
         listaPrueba.add(p1);
         listaPrueba.add(p2);
-        Albaran alb=new Albaran(1, listaPrueba, cli1);
+        Albaran alb=new Albaran(listaPrueba, cli1);
         System.out.println(alb.toString());
         /*Ejemplo*/
         

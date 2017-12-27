@@ -37,7 +37,7 @@ public class Listar {
     
     public static void listarAlbaranes(Calendar fecha){
         for (Albaran albaran : listaAlbaranes)
-            if (albaran.getFechaCompra().compareTo(fecha)==0)
+            if (albaran.getFecha().compareTo(fecha)==0)
                 System.out.println(albaran.toString());
     }
     

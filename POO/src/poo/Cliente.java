@@ -1,5 +1,7 @@
 package poo;
 
+import java.util.*;
+
 
 public class Cliente {
     private String nombre;
@@ -7,6 +9,7 @@ public class Cliente {
     private String direccion;
     private final String codigo;
     private double credito;
+    private ArrayList <Producto> listaProductos;
     
 
     
