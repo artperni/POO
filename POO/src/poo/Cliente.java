@@ -9,7 +9,7 @@ public class Cliente {
     private String direccion;
     private final String codigo;
     private double credito;
-    private ArrayList <Producto> listaProductos;
+    private final ArrayList <Unidad> listaUnidades;
     
 
     
@@ -21,6 +21,7 @@ public class Cliente {
         this.direccion = direccion;
         this.credito = credito;
         this.codigo = nif.concat(nombre);
+        this.listaUnidades = new ArrayList <> ();
     }
     
 

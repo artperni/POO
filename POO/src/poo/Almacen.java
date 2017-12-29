@@ -9,7 +9,9 @@ public class Almacen {
     private String codigo;
     private Localizacion localizacion;
 
-    public Almacen() {
+    public Almacen(String codigo, Localizacion localizacion) {
+        this.codigo = codigo;
+        this.localizacion = localizacion;
         listaProductos = new ArrayList<>();
     }
     
@@ -47,8 +49,10 @@ public class Almacen {
     public int caducidadProductos(int dias){
         int contadorDias=0;
         for (Producto producto : this.listaProductos){//Recorremos la lista de productos
-            if(producto.isCaducado(dias)){
-                contadorDias++;
+            for (Unidad unidad : producto.getListaUnidades()){//Recorremos la lista de unidades
+                if(unidad.isCaducado(dias)){
+                    contadorDias++;
+                }
             }
         }    
         return contadorDias;
@@ -57,15 +61,17 @@ public class Almacen {
     public void estadoProductos(String estado){
         int contLibre=0,contVendido=0,contReservado=0;
         for (Producto producto : this.listaProductos){
-            if (producto.isLibre())
-                contLibre++;
-            else if (producto.isReservado())
-                contReservado++;
-            else if (producto.isVendido())
-                contVendido++;
-            else
-                System.out.println("Error en el producto con referencia "+
-                        producto.getReferencia());
+            for (Unidad unidad : producto.getListaUnidades()){
+                if (unidad.isLibre())
+                    contLibre++;
+                else if (unidad.isReservado())
+                    contReservado++;
+                else if (unidad.isVendido())
+                    contVendido++;
+                else
+                    System.out.println("Error en el producto con referencia "+
+                    producto.getReferencia());
+            }
         }
         System.out.println("\nProductos libres: "+contLibre+"\nProductos vendidos: "+
                 contVendido+"\nProductos reservados: "+contReservado);
@@ -74,8 +80,10 @@ public class Almacen {
     public int libreCaducadoProductos(){
         int contLibCad=0;
         for (Producto producto : this.listaProductos){
-            if(producto.isCaducado() && producto.isLibre()){
-                contLibCad++;
+            for (Unidad unidad : producto.getListaUnidades()){
+                if(unidad.isCaducado() && unidad.isLibre()){
+                    contLibCad++;
+                }   
             }
         }
         return contLibCad;
@@ -84,9 +92,13 @@ public class Almacen {
     
     public void eliminarCaducados(){
         for (Producto producto : this.listaProductos){
-            if(producto.isCaducado()){
-                this.listaProductos.remove(producto);
+            for (Unidad unidad : producto.getListaUnidades()){
+                if(unidad.isCaducado()){
+                    producto.eliminarUnidad(unidad);
+                }               
             }
+            if (producto.isVacio())
+                eliminar(producto);
         }
     }
     
@@ -99,16 +111,18 @@ public class Almacen {
     }
     
     /*this es el almacen que contiene el producto a trasladar y
-    "almacen" es el almacen que contendrá en el futuro a "producto"*/
+    "almacen" es el almacen que contendrá en el futuro a "producto".
+    Trasladamos un producto entero con todas sus unidades, de tener alguna*/
     public void trasladar(Producto producto, Almacen almacen){
         this.eliminar(producto);
         almacen.anadir(producto);
     }
     
     
-    public void vender(ArrayList <Producto> listaCompra, Cliente cliente){
+    public void vender(ArrayList <Unidad> listaCompra, Cliente cliente){
         Albaran albaran = new Albaran(listaCompra, cliente);
-        
+        //if (albaran.getImporteTotal() > cliente.getCredito())
+          
         
         /*for (Producto producto : albaran){
             

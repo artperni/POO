@@ -6,25 +6,23 @@ import java.util.*;
 
 public class Producto {
     private String referencia;
-    private int stock;
+    private final int stock;
     private Dimensiones dimensiones;
-    private Estado estado;
     private double precioCompra;
     private double descuento;
-    private Calendar fechaCaducidad;
     private final double precioVenta;
+    private ArrayList <Unidad> listaUnidades;
     
     
     
-    public Producto(String referencia, int stock, Dimensiones dimensiones, Estado estado, double precioCompra, double descuento, Calendar fechaCaducidad) {
+    public Producto(String referencia, Dimensiones dimensiones, double precioCompra, double descuento) {
         this.referencia = referencia;
-        this.stock = stock;
+        this.stock = listaUnidades.size();
         this.dimensiones = dimensiones;
-        this.estado = estado;
         this.precioCompra = precioCompra;
         this.descuento = descuento;
-        this.fechaCaducidad = fechaCaducidad;
         this.precioVenta = precioCompra+precioCompra/2-descuento;
+        this.listaUnidades = new ArrayList <> ();
         Listar.listaProductosTotal.add(this);
     }
     
@@ -41,10 +39,6 @@ public class Producto {
         return dimensiones;
     }
 
-    public Estado getEstado() {
-        return estado;
-    }
-
     public double getPrecioCompra() {
         return precioCompra;
     }
@@ -57,24 +51,16 @@ public class Producto {
         return descuento;
     }
 
-    public Calendar getFechaCaducidad() {
-        return fechaCaducidad;
+    public ArrayList<Unidad> getListaUnidades() {
+        return listaUnidades;
     }
 
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
+    
     public void setDimensiones(Dimensiones dimensiones) {
         this.dimensiones = dimensiones;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
     }
 
     public void setPrecioCompra(double precioCompra) {
@@ -85,53 +71,44 @@ public class Producto {
         this.descuento = descuento;
     }
 
-    public void setFechaCaducidad(Calendar fechaCaducidad) {
-        this.fechaCaducidad = fechaCaducidad;
+    public void setListaUnidades(ArrayList<Unidad> listaUnidades) {
+        this.listaUnidades = listaUnidades;
     }
+    
+    
 
     @Override
     public String toString() {
         return "Referencia: "+this.referencia+"\tNumero de producto: "+this.stock+
-                "\tDimensiones: "+this.dimensiones.toString()+"\tEstado producto: "+
-                this.estado.toString()+"\tFecha de caducidad: "+this.fechaCaducidad+
-                "\tPrecio: "+this.precioVenta+"€";
+                "\tDimensiones: "+this.dimensiones.toString()+
+                "\tPrecio: "+this.precioVenta+"€"+listaUnidades.toString();
     }
 
     
     
     
     
-    public boolean isCaducado(Calendar ahora){
-        return ahora.after(this.fechaCaducidad);
+    public void anadirUnidad(Unidad unidad){
+        this.listaUnidades.add(unidad);
     }
     
-    public boolean isCaducado(){
-        Calendar fechaActual = Calendar.getInstance();
-        return isCaducado(fechaActual);
+    public void anadirUnidades(ArrayList <Unidad> listaunidades){
+        for (Unidad unidad : listaunidades)
+            anadirUnidad(unidad);
     }
     
-    public boolean isCaducado(int dias){
-        Calendar fechaActual = Calendar.getInstance();
-        fechaActual.set(Calendar.DAY_OF_MONTH, dias);//Damos unos días de margen a elección
-        return isCaducado(fechaActual);
+    public void eliminarUnidad(Unidad unidad){
+        this.listaUnidades.remove(unidad);
     }
     
-    public boolean isLibre(){
-        return this.estado.name().equals("libre");
+    public void eliminarUnidades(ArrayList <Unidad> listaunidades){
+        for (Unidad unidad : listaunidades)
+            eliminarUnidad(unidad);
     }
     
-    public boolean isVendido(){
-           return this.estado.name().equals("vendido");
+    public boolean isVacio(){
+        return this.listaUnidades.isEmpty();
     }
-    
-    public boolean isReservado(){
-           return this.estado.name().equals("reservado");
-    }
-
-    
-    
-    
-    
     
     
 }

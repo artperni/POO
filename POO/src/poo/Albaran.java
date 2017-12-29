@@ -5,20 +5,20 @@ import java.util.*;
 
 public class Albaran {
     private Calendar fecha;
-    private static int numero;
-    private ArrayList <Producto> listaCompra;
+    private static int numeroAlbaran;
+    private ArrayList <Unidad> listaCompra;
     private double importeTotal;
     private Cliente cliente;
 
 
 
-    public Albaran(ArrayList<Producto> listaCompra,  Cliente cliente){
+    public Albaran(ArrayList<Unidad> listaCompra,  Cliente cliente){
         Calendar now = Calendar.getInstance();
         this.fecha = now;
-        numero++;
+        numeroAlbaran++;
         this.listaCompra = listaCompra;
         this.cliente = cliente;
-        for(Producto producto : listaCompra){
+        for(Unidad producto : listaCompra){
             this.importeTotal+=producto.getPrecioVenta();
         }
         Listar.listaAlbaranes.add(this);
@@ -29,10 +29,10 @@ public class Albaran {
     }
 
     public static int getNumero() {
-        return numero;
+        return numeroAlbaran;
     }
 
-    public ArrayList <Producto> getListaCompra() {
+    public ArrayList <Unidad> getListaCompra() {
         return listaCompra;
     }
 
@@ -49,10 +49,10 @@ public class Albaran {
     }
 
     public static void setNumero(int aNumero) {
-        numero = aNumero;
+        numeroAlbaran = aNumero;
     }
 
-    public void setListaCompra(ArrayList <Producto> listaCompra) {
+    public void setListaCompra(ArrayList <Unidad> listaCompra) {
         this.listaCompra = listaCompra;
     }
 
@@ -67,7 +67,7 @@ public class Albaran {
 
     @Override
     public String toString() {
-        return "Fecha de creación del albarám: "+this.getFecha()+"\nNúmero de albarán: "+this.getNumero()+
+        return "Fecha de creación del albarám: "+this.getFecha()+"\nNúmero de albarán: "+numeroAlbaran+
                 "\nLista de productos: "+this.getListaCompra().toString()+"\nImporte total: "+this.getImporteTotal()+
                 "\nCliente asociado: "+this.getCliente().toString();
     }

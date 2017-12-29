@@ -60,7 +60,7 @@ public class POO {
                 */
                 
         /*Ejemplo*/
-        Listar lista = Listar.getIntancia();
+        /*Listar lista = Listar.getIntancia();
         Calendar cal = Calendar.getInstance();
         Almacen almacen = new Almacen();
         ArrayList <Producto> listaPrueba=new ArrayList <> ();
@@ -79,7 +79,7 @@ public class POO {
         listaPrueba.add(p1);
         listaPrueba.add(p2);
         Albaran alb=new Albaran(listaPrueba, cli1);
-        System.out.println(alb.toString());
+        System.out.println(alb.toString());*/
         /*Ejemplo*/
         
         

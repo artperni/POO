@@ -11,7 +11,7 @@ public class Factura extends Albaran {
     private Calendar fechaFactura;
 
     //Tengamos en cuenta que no podemos crear una factura si no hay un albarán previo
-    public Factura(String observaciones, FormaPago formaPago, ArrayList<Producto> listaCompra, Cliente cliente) {
+    public Factura(String observaciones, FormaPago formaPago, ArrayList<Unidad> listaCompra, Cliente cliente) {
         super(listaCompra, cliente);
         Calendar now = Calendar.getInstance();
         this.fechaFactura = now;
