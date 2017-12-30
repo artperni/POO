@@ -7,57 +7,46 @@ import java.util.*;
 public class POO {
 
     public static void main(String[] args) {
-        /*
-        Scanner entrada = new Scanner(System.in); //Sirve para recoger texto por consola
+        Scanner sc = new Scanner(System.in); //Sirve para recoger texto por consola
 	int menu = -1; //opción elegida del usuario
-	int num1 = 0, num2 = 0; //Variables
 	
 		//Mientras la opción elegida sea 0, preguntamos al usuario
-		while(menu != 0){
-			//Try catch para evitar que el programa termine si hay un error
-			try{
-				System.out.println("Elige opción:\n1.- Sumar" +
-						"\n2.- Restar\n" +
-						"3.- Multiplicar\n" +
-						"4.- Dividir\n" +
-						"0.- Salir");
+	while(menu != 0){
+		//Try catch para evitar que el programa termine si hay un error
+		
+			System.out.println("\nElige una opción:\n1.- Vender" +
+					"\n2.- Restar\n" +
+					"3.- Multiplicar\n" +
+					"4.- Dividir\n" +
+					"0.- Salir\nOpción: ");
+			
+			menu = sc.nextInt(); 
+
+			//Ejemplo de switch case en Java
+			switch(menu){
+			case 1: 
 				
-				menu = Integer.parseInt(entrada.nextLine()); 
-	
-				//Ejemplo de switch case en Java
-				switch(menu){
-				case 1: 
-					
-					
-					break;
-				case 2: 
-					
-					break;
-				case 3: 
-					
-                                   
-					break;
-				case 4: 
-					
-					break;
-				case 0: 
-					System.out.println("Saliendo");
-					break;
-				default:
-					System.out.println("Número no reconocido");
-                                        break;
-				}
 				
-				System.out.println("\n");
+				break;
+			case 2: 
+					
+				break;
+			case 3: 
 				
-			}catch(NumberFormatException ex){
-				System.out.println("Error!");
-			}
-                        
-                            
-                        
-		}
-                */
+                                  
+				break;
+			case 4: 
+				
+				break;
+			case 0: 
+				System.out.println("Saliendo");
+				break;
+			default:
+				System.out.println("Número no reconocido");
+                                break;
+		}	
+	}
+                
                 
         /*Ejemplo*/
         /*Listar lista = Listar.getIntancia();

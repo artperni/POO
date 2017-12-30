@@ -7,7 +7,7 @@ que no está vinculada a un producto*/
 public class Unidad extends Producto{
     private Estado estado;
     private Calendar fechaCaducidad;
-    private final int numero;
+    private int numero;
 
     public Unidad(Estado estado, Calendar fechaCaducidad, String referencia,
             Dimensiones dimensiones, double precioCompra, double descuento) {
@@ -26,12 +26,20 @@ public class Unidad extends Producto{
         return fechaCaducidad;
     }
 
+    public int getNumero() {
+        return numero;
+    }
+
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
     public void setFechaCaducidad(Calendar fechaCaducidad) {
         this.fechaCaducidad = fechaCaducidad;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
     
     public boolean isCaducado(Calendar ahora){

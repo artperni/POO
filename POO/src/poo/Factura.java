@@ -12,7 +12,7 @@ public class Factura extends Albaran {
 
     //Tengamos en cuenta que no podemos crear una factura si no hay un albarán previo
     public Factura(String observaciones, FormaPago formaPago, ArrayList<Unidad> listaCompra, Cliente cliente) {
-        super(listaCompra, cliente);
+        super(cliente);
         Calendar now = Calendar.getInstance();
         this.fechaFactura = now;
         this.observaciones = observaciones;

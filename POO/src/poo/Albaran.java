@@ -12,11 +12,11 @@ public class Albaran {
 
 
 
-    public Albaran(ArrayList<Unidad> listaCompra,  Cliente cliente){
+    public Albaran(Cliente cliente){
         Calendar now = Calendar.getInstance();
         this.fecha = now;
         numeroAlbaran++;
-        this.listaCompra = listaCompra;
+        this.listaCompra = new ArrayList <> ();
         this.cliente = cliente;
         for(Unidad producto : listaCompra){
             this.importeTotal+=producto.getPrecioVenta();
@@ -72,5 +72,10 @@ public class Albaran {
                 "\nCliente asociado: "+this.getCliente().toString();
     }
 
+    
+    
+    public void anadirCesta(Unidad unidad){
+        this.listaCompra.add(unidad);
+    }
     
 }

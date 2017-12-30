@@ -110,5 +110,10 @@ public class Producto {
         return this.listaUnidades.isEmpty();
     }
     
+    public void actualizar(ArrayList <Unidad> listaUnidades){
+        for (Unidad unidad : listaUnidades)
+            unidad.setNumero(unidad.getListaUnidades().indexOf(unidad));
+    }
+    
     
 }

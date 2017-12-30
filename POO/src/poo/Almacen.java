@@ -106,8 +106,28 @@ public class Almacen {
         this.listaProductos.remove(producto);
     }
     
+    public void eliminar(Unidad unidad){
+        for (Producto producto : this.listaProductos)
+            producto.getListaUnidades().remove(unidad);
+    }
+    
+    /*Elimina una unidad concreta del producto con essa referncia*/
+    public void eliminar(String referencia, int numero){
+        for (Producto producto : this.listaProductos){
+            if (producto.getReferencia().equals(referencia))
+                producto.getListaUnidades().remove(numero);
+        }
+    }
+    
     public void anadir(Producto producto){
         this.listaProductos.add(producto);
+    }
+    
+    public void anadir(Unidad unidad){
+        for (Producto producto : this.listaProductos){
+            if (unidad.getReferencia().equals(producto.getReferencia()))
+                producto.getListaUnidades().add(unidad);
+        }
     }
     
     /*this es el almacen que contiene el producto a trasladar y
@@ -118,16 +138,17 @@ public class Almacen {
         almacen.anadir(producto);
     }
     
-    
-    public void vender(ArrayList <Unidad> listaCompra, Cliente cliente){
-        Albaran albaran = new Albaran(listaCompra, cliente);
-        //if (albaran.getImporteTotal() > cliente.getCredito())
-          
-        
-        /*for (Producto producto : albaran){
-            
-            Listar.totalVendido = Listar.totalVendido + producto.getPrecioVenta();
-        }*/
+    /*devuelve false si no se puede completar la venta y true cuando se realice
+    con exito*/
+    public boolean vender(Cliente cliente){
+        Albaran albaran = new Albaran(cliente);
+        if (albaran.getImporteTotal() > cliente.getCredito())
+            return false;
+        for (Unidad unidad : albaran.getListaCompra()){
+            cliente.comprarUnidad(unidad);
+            Listar.totalVendido = Listar.totalVendido + unidad.getPrecioVenta();
+        }
+        return true;
     }
     
 }

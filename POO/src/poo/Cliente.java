@@ -9,7 +9,7 @@ public class Cliente {
     private String direccion;
     private final String codigo;
     private double credito;
-    private final ArrayList <Unidad> listaUnidades;
+    private ArrayList <Unidad> listaUnidades;
     
 
     
@@ -45,6 +45,10 @@ public class Cliente {
         return credito;
     }
 
+    public ArrayList<Unidad> getListaUnidades() {
+        return listaUnidades;
+    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -61,6 +65,10 @@ public class Cliente {
         this.credito = credito;
     }
 
+    public void setListaUnidades(ArrayList<Unidad> listaUnidades) {
+        this.listaUnidades = listaUnidades;
+    }
+
     @Override
     public String toString() {
         return "\nNombre del cliente: "+this.nombre+"\tNIF del cliente: "+this.nif+
@@ -70,6 +78,22 @@ public class Cliente {
     
     
     
+    
+    public void devolver(Unidad unidad, Almacen almacen){
+        this.listaUnidades.remove(unidad);
+        almacen.anadir(unidad);
+        this.credito = this.credito + unidad.getPrecioVenta();
+    }
+    
+    public void aumentarCredito(double credito){
+        this.credito = this.credito + credito;
+    }
+    
+    public void comprarUnidad(Unidad unidad){
+        this.listaUnidades.add(unidad);
+        this.credito = this.credito - unidad.getPrecioVenta();
+        unidad.setEstado(Estado.vendido);
+    }
     
     
     
