@@ -80,6 +80,8 @@ public class POO {
         System.out.println(alb.toString());
         
         alb.serialize();
+        almacen.serialize();
+        cli1.serialize();
         /*Test*/
         
         

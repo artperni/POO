@@ -10,7 +10,7 @@ public class Cliente {
     private final String codigo;
     private double credito;
     private ArrayList <Unidad> listaUnidades;
-    
+    private IPersistence objDac;
 
     
     
@@ -23,6 +23,7 @@ public class Cliente {
         this.codigo = nif.concat(nombre);
         this.listaUnidades = new ArrayList <> ();
         Listar.listaClientes.add(this);
+        this.objDac = new ClienteDAC();
     }
     
 
@@ -77,6 +78,9 @@ public class Cliente {
                 this.codigo+"\tCrédito del cliente: "+this.credito+"€";
     }
     
+    public void serialize(){
+        this.objDac.xmlSerialize(this);
+    }
     
     
     
