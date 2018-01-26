@@ -9,13 +9,14 @@ public class Unidad extends Producto{
     private Calendar fechaCaducidad;
     private int numero;
 
-    public Unidad(Estado estado, Calendar fechaCaducidad, String referencia,
-            Dimensiones dimensiones, double precioCompra, double descuento) {
-        super(referencia, dimensiones, precioCompra, descuento);
+    public Unidad(Estado estado, Calendar fechaCaducidad, Producto p1) {
+        super(p1.getReferencia(), p1.getDimensiones(), p1.getPrecioCompra(), p1.getDescuento());
         this.estado = estado;
         this.fechaCaducidad = fechaCaducidad;
-        this.numero = super.getListaUnidades().indexOf(this);
+        this.numero = p1.getListaUnidades().indexOf(this);
         /*Este numero indica la posicion de la unidad en el producto*/
+        p1.anadirUnidad(this);
+        p1.actualizar();
     }
 
     public Estado getEstado() {
@@ -71,7 +72,7 @@ public class Unidad extends Producto{
 
     @Override
     public String toString() {
-        return "Numero de la Unidad: "+this.numero+"Estado: "+this.estado+"\tFecha de Caducidad: "+this.fechaCaducidad;
+        return "Numero de la Unidad: "+this.numero+"Estado: "+this.estado+"\tFecha de Caducidad: "+this.fechaCaducidad.getTime().toString();
     }
     
 

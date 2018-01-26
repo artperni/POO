@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Producto {
     private String referencia;
-    private final int stock;
+    private int stock;
     private Dimensiones dimensiones;
     private double precioCompra;
     private double descuento;
@@ -17,7 +17,6 @@ public class Producto {
     
     public Producto(String referencia, Dimensiones dimensiones, double precioCompra, double descuento) {
         this.referencia = referencia;
-        this.stock = listaUnidades.size();
         this.dimensiones = dimensiones;
         this.precioCompra = precioCompra;
         this.descuento = descuento;
@@ -109,10 +108,11 @@ public class Producto {
     public boolean isVacio(){
         return this.listaUnidades.isEmpty();
     }
-    
-    public void actualizar(ArrayList <Unidad> listaUnidades){
-        for (Unidad unidad : listaUnidades)
-            unidad.setNumero(unidad.getListaUnidades().indexOf(unidad));
+    //Pendiente de comprobacion
+    public void actualizar(){
+        this.stock = this.listaUnidades.size();
+        for (Unidad unidad : this.listaUnidades)
+            unidad.setNumero(this.listaUnidades.indexOf(unidad));
     }
     
     

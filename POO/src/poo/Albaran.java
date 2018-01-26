@@ -3,33 +3,28 @@ package poo;
 
 import java.util.*;
 
-public class Albaran {
+public class Albaran{
     private Calendar fecha;
-    private static int numeroAlbaran;
+    private int numeroAlbaran;
     private ArrayList <Unidad> listaCompra;
     private double importeTotal;
     private Cliente cliente;
+    private IPersistence objDac;
 
 
 
     public Albaran(Cliente cliente){
         Calendar now = Calendar.getInstance();
         this.fecha = now;
-        numeroAlbaran++;
         this.listaCompra = new ArrayList <> ();
         this.cliente = cliente;
-        for(Unidad producto : listaCompra){
-            this.importeTotal+=producto.getPrecioVenta();
-        }
         Listar.listaAlbaranes.add(this);
+        this.numeroAlbaran = Listar.listaAlbaranes.indexOf(this);
+        this.objDac = new AlbaranDAC();
     }
     
     public Calendar getFecha() {
         return fecha;
-    }
-
-    public static int getNumero() {
-        return numeroAlbaran;
     }
 
     public ArrayList <Unidad> getListaCompra() {
@@ -44,12 +39,12 @@ public class Albaran {
         return cliente;
     }
 
-    public void setFecha(Calendar fecha) {
-        this.fecha = fecha;
+    public int getNumeroAlbaran() {
+        return numeroAlbaran;
     }
 
-    public static void setNumero(int aNumero) {
-        numeroAlbaran = aNumero;
+    public void setFecha(Calendar fecha) {
+        this.fecha = fecha;
     }
 
     public void setListaCompra(ArrayList <Unidad> listaCompra) {
@@ -63,19 +58,28 @@ public class Albaran {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public void setNumeroAlbaran(int numeroAlbaran) {
+        this.numeroAlbaran = numeroAlbaran;
+    }
     
 
     @Override
     public String toString() {
-        return "Fecha de creación del albarám: "+this.getFecha()+"\nNúmero de albarán: "+numeroAlbaran+
-                "\nLista de productos: "+this.getListaCompra().toString()+"\nImporte total: "+this.getImporteTotal()+
-                "\nCliente asociado: "+this.getCliente().toString();
+        return "Fecha de creación del albarán: "+this.fecha.getTime().toString()+"\nNúmero de albarán: "+this.numeroAlbaran+
+                "\nLista de productos: "+this.listaCompra.toString()+"\nImporte total: "+this.importeTotal+
+                "\nCliente asociado: "+this.cliente.toString();
     }
 
     
-    
     public void anadirCesta(Unidad unidad){
         this.listaCompra.add(unidad);
+        this.importeTotal+=unidad.getPrecioVenta();
+    }
+    
+    
+    public void serialize(){
+        this.objDac.xmlSerialize(this);
     }
     
 }

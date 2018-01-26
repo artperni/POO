@@ -13,6 +13,7 @@ public class Almacen {
         this.codigo = codigo;
         this.localizacion = localizacion;
         listaProductos = new ArrayList<>();
+        Listar.listaAlmacenes.add(this);
     }
     
     
@@ -130,7 +131,7 @@ public class Almacen {
         }
     }
     
-    /*this es el almacen que contiene el producto a trasladar y
+    /*this.almacen es el almacen que contiene el producto a trasladar y
     "almacen" es el almacen que contendrá en el futuro a "producto".
     Trasladamos un producto entero con todas sus unidades, de tener alguna*/
     public void trasladar(Producto producto, Almacen almacen){

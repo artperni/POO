@@ -7,6 +7,8 @@ public class Listar {
     public static ArrayList <Albaran> listaAlbaranes = new ArrayList<>();     
     public static double totalVendido;
     public static ArrayList <Factura> listaFacturas = new ArrayList<>();
+    public static ArrayList <Almacen> listaAlmacenes = new ArrayList<>();
+    public static ArrayList <Cliente> listaClientes = new ArrayList<>();
     private static Listar unicaInstancia = null;
 
     private Listar() {
@@ -17,6 +19,8 @@ public class Listar {
             unicaInstancia = new Listar();
         return unicaInstancia;
     }
+    
+    
     
      public static void listarProductosTotal(){
         for (Producto producto : listaProductosTotal)
@@ -38,6 +42,12 @@ public class Listar {
     public static void listarAlbaranes(Calendar fecha){
         for (Albaran albaran : listaAlbaranes)
             if (albaran.getFecha().compareTo(fecha)==0)
+                System.out.println(albaran.toString());
+    }
+    
+    public static void listarAlbaranes(int numeroAlb){
+        for (Albaran albaran : listaAlbaranes)
+            if (albaran.getNumeroAlbaran() == numeroAlb)
                 System.out.println(albaran.toString());
     }
     
@@ -63,6 +73,16 @@ public class Listar {
     public static void listarStock(Producto producto){
         System.out.println("Stock del producto "+producto.getReferencia()+": "+
                 producto.getStock());
+    }
+    
+    public static void listarAlmacenes(){
+        for (Almacen almacen : listaAlmacenes)
+            System.out.println(almacen.toString());
+    }
+    
+    public static void listarClientes(){
+        for (Cliente cliente : listaClientes)
+            System.out.println(cliente.toString());
     }
     
     

@@ -22,6 +22,7 @@ public class Cliente {
         this.credito = credito;
         this.codigo = nif.concat(nombre);
         this.listaUnidades = new ArrayList <> ();
+        Listar.listaClientes.add(this);
     }
     
 
@@ -94,8 +95,7 @@ public class Cliente {
         this.credito = this.credito - unidad.getPrecioVenta();
         unidad.setEstado(Estado.vendido);
     }
-    
-    
+
     
     
 }

@@ -6,7 +6,7 @@ import java.util.*;
 
 public class POO {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {/*
         Scanner sc = new Scanner(System.in); //Sirve para recoger texto por consola
 	int menu = -1; //opción elegida del usuario
 	
@@ -47,31 +47,41 @@ public class POO {
 		}	
 	}
                 
-                
-        /*Ejemplo*/
-        /*Listar lista = Listar.getIntancia();
+              */  
+        /*Test*/
+        Listar lista = Listar.getIntancia();
         Calendar cal = Calendar.getInstance();
-        Almacen almacen = new Almacen();
-        ArrayList <Producto> listaPrueba=new ArrayList <> ();
+        
+        Almacen almacen = new Almacen("a1", Localizacion.seco);
+        
         Cliente cli1 = new Cliente("Alejandro Maestro", "48576822Y", "Calle Pelícano nº7", 1500.5);
         System.out.println(cli1.toString());
         
+        Producto p1=new Producto("SE001", new Dimensiones(47.39, 20.78), 82, 6.3);
         cal.set(2028, 12, 25);
-        Producto p1=new Producto("SE001", 1, new Dimensiones(47.39, 20.78), Estado.libre, 513.50, 51.70, cal);
+        Unidad u1=new Unidad(Estado.libre, cal, p1);
+        cal.set(2018, 3, 9);
+        Unidad u2=new Unidad(Estado.libre, cal, p1);
         System.out.println(p1.toString());
         
+        Producto p2=new Producto("SE002", new Dimensiones(47.39, 20.78), 82, 6.3);
         cal.set(2071, 1, 8);
-        Producto p2=new Producto("ST002", 2, new Dimensiones(18.74, 49.31), Estado.reservado, 10.50, 0.70, cal);
+        Unidad u3=new Unidad(Estado.reservado, cal, p2);
+        cal.set(2018, 3, 9);
+        Unidad u4=new Unidad(Estado.vendido, cal, p2);
+        System.out.println(p2.toString());
         
-        almacen.listaProductos.add(p1);
-        almacen.listaProductos.add(p2);
-        listaPrueba.add(p1);
-        listaPrueba.add(p2);
-        Albaran alb=new Albaran(listaPrueba, cli1);
-        System.out.println(alb.toString());*/
-        /*Ejemplo*/
+        almacen.anadir(p1);
+        almacen.anadir(p2);
+        
+        Albaran alb=new Albaran(cli1);
+        alb.anadirCesta(u2);
+        alb.anadirCesta(u4);
+        System.out.println(alb.toString());
+        
+        alb.serialize();
+        /*Test*/
         
         
     }
-    
 }

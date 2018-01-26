@@ -1,10 +1,9 @@
 package poo;
 
-
-
 import java.util.*;
 
-public class Factura extends Albaran {
+public class Factura 
+        extends Albaran{
     private String observaciones;
     private FormaPago formaPago;
     private boolean estadoFactura=false;
@@ -68,8 +67,6 @@ public class Factura extends Albaran {
                 "\nForma de pago: "+this.getFormaPago().toString()+"Estado de la factura: "+
                 estadoFac;
     }
-
-    
     
     
     
