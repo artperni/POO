@@ -11,6 +11,11 @@ public class Dimensiones {
         this.altura = altura;
     }
 
+    public Dimensiones() {
+        this.ancho = 0;
+        this.altura = 0;
+    }
+
     @Override
     public String toString() {
         return this.ancho+"x"+this.altura;

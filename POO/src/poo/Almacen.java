@@ -17,6 +17,9 @@ public class Almacen {
         Listar.listaAlmacenes.add(this);
         this.objDac = new AlmacenDAC();
     }
+
+    public Almacen() {
+    }
     
     
         

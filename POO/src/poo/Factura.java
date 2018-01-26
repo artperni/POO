@@ -20,6 +20,10 @@ public class Factura
         Listar.listaFacturas.add(this);
         this.objDac = new FacturaDAC();
     }
+
+    public Factura() {
+        super(null);
+    }
     
     
     

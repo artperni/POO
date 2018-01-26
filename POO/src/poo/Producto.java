@@ -24,6 +24,10 @@ public class Producto {
         this.listaUnidades = new ArrayList <> ();
         Listar.listaProductosTotal.add(this);
     }
+
+    public Producto() {
+        this.precioVenta = 0;
+    }
     
 
     public String getReferencia() {
