@@ -2,11 +2,69 @@ package poo;
 
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class POO {
 
-    public static void main(String[] args) {/*
+    public static void main(String[] args) throws FileNotFoundException, IOException{
+    /*    
+    static void LimpiarConsola() {
+        // Limpia la consola (no funciona en diferentes SS.OO.)
+        System.out.println("\033[H\033[2J");
+        System.out.flush();
+    }
+*/
+    static void MenuPrincipal() {
+
+        int seleccion = 0;
+        do {
+            
+            Scanner scn = new Scanner(System.in);
+
+            System.out.println("--- MENÚ PRINCIPAL ---");
+            System.out.println("1. Almacen");
+            System.out.println("2. Buscar Producto");
+            System.out.println("3. Albarán");
+            System.out.println("4. Factura");
+            System.out.println("5. ");
+            System.out.println("6. ");
+            System.out.println("0. SALIR");
+            System.out.println("Introduce selección: ");
+            seleccion = scn.nextInt();
+
+            switch (seleccion) {
+                case 1:
+                   
+                    break;
+                case 2:
+                    
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                case 5:
+                    
+                    break;
+                case 6:
+                    
+                    break;
+                case 0:
+                    System.out.println("CERRANDO PROGRAMA");
+                    System.exit(0);
+                    break;
+            }
+
+        } while (seleccion != 0);
+    }
+        
+        
+        
+        /*
         Scanner sc = new Scanner(System.in); //Sirve para recoger texto por consola
 	int menu = -1; //opción elegida del usuario
 	
