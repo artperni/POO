@@ -8,7 +8,6 @@ public class Factura
     private FormaPago formaPago;
     private boolean estadoFactura=false;
     private Calendar fechaFactura;
-    private IPersistence objDac;
 
     //Tengamos en cuenta que no podemos crear una factura si no hay un albarán previo
     public Factura(String observaciones, FormaPago formaPago, ArrayList<Unidad> listaCompra, Cliente cliente) {
@@ -17,16 +16,11 @@ public class Factura
         this.fechaFactura = now;
         this.observaciones = observaciones;
         this.formaPago = formaPago;
-        Listar.listaFacturas.add(this);
-        this.objDac = new FacturaDAC();
     }
 
     public Factura() {
         super(null);
     }
-    
-    
-    
     
     public String getObservaciones() {
         return observaciones;
@@ -71,7 +65,6 @@ public class Factura
                 "\nForma de pago: "+this.getFormaPago().toString()+"Estado de la factura: "+
                 estadoFac;
     }
-    
     
     
 }

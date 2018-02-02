@@ -78,10 +78,10 @@ public class POO {
         alb.anadirCesta(u2);
         alb.anadirCesta(u4);
         System.out.println(alb.toString());
+        Factura fac=new Factura("observaciones", FormaPago.contado, alb.getListaCompra(), cli1);
+        Cliente cli2 = new Cliente("Arturo Gomez", "72936277A", "Camino Viejo de Simancas nº23", 2450.85);
         
-        alb.serialize();
-        almacen.serialize();
-        cli1.serialize();
+        
         /*Test*/
         
         

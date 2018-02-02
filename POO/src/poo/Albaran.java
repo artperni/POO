@@ -9,7 +9,6 @@ public class Albaran{
     private ArrayList <Unidad> listaCompra;
     private double importeTotal;
     private Cliente cliente;
-    private IPersistence objDac;
 
 
 
@@ -20,7 +19,6 @@ public class Albaran{
         this.cliente = cliente;
         Listar.listaAlbaranes.add(this);
         this.numeroAlbaran = Listar.listaAlbaranes.indexOf(this);
-        this.objDac = new AlbaranDAC();
     }
 
     public Albaran() {
@@ -78,11 +76,6 @@ public class Albaran{
     public void anadirCesta(Unidad unidad){
         this.listaCompra.add(unidad);
         this.importeTotal+=unidad.getPrecioVenta();
-    }
-    
-    
-    public void serialize(){
-        this.objDac.xmlSerialize(this);
     }
     
 }

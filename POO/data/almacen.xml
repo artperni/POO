@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_121" class="java.beans.XMLDecoder">
+ <object class="poo.Almacen" id="Almacen0">
+  <void class="poo.Almacen" method="getField">
+   <string>listaProductos</string>
+   <void method="set">
+    <object idref="Almacen0"/>
+    <object class="java.util.ArrayList">
+     <void method="add">
+      <object class="poo.Producto">
+       <void property="descuento">
+        <double>6.3</double>
+       </void>
+       <void property="dimensiones">
+        <object class="poo.Dimensiones" id="Dimensiones0"/>
+       </void>
+       <void property="listaUnidades">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <object class="poo.Unidad">
+           <void property="descuento">
+            <double>6.3</double>
+           </void>
+           <void property="dimensiones">
+            <object idref="Dimensiones0"/>
+           </void>
+           <void property="estado">
+            <object class="java.lang.Enum" id="Estado0" method="valueOf">
+             <class>poo.Estado</class>
+             <string>libre</string>
+            </object>
+           </void>
+           <void property="fechaCaducidad">
+            <object class="java.util.GregorianCalendar" id="GregorianCalendar0">
+             <void property="time">
+              <object class="java.util.Date">
+               <long>1523225352722</long>
+              </object>
+             </void>
+            </object>
+           </void>
+           <void property="listaUnidades">
+            <object class="java.util.ArrayList"/>
+           </void>
+           <void property="precioCompra">
+            <double>82.0</double>
+           </void>
+           <void property="referencia">
+            <string>SE001</string>
+           </void>
+          </object>
+         </void>
+         <void method="add">
+          <object class="poo.Unidad">
+           <void property="descuento">
+            <double>6.3</double>
+           </void>
+           <void property="dimensiones">
+            <object idref="Dimensiones0"/>
+           </void>
+           <void property="estado">
+            <object idref="Estado0"/>
+           </void>
+           <void property="fechaCaducidad">
+            <object idref="GregorianCalendar0"/>
+           </void>
+           <void property="listaUnidades">
+            <object class="java.util.ArrayList"/>
+           </void>
+           <void property="numero">
+            <int>1</int>
+           </void>
+           <void property="precioCompra">
+            <double>82.0</double>
+           </void>
+           <void property="referencia">
+            <string>SE001</string>
+           </void>
+          </object>
+         </void>
+        </object>
+       </void>
+       <void property="precioCompra">
+        <double>82.0</double>
+       </void>
+       <void property="referencia">
+        <string>SE001</string>
+       </void>
+      </object>
+     </void>
+     <void method="add">
+      <object class="poo.Producto">
+       <void property="descuento">
+        <double>6.3</double>
+       </void>
+       <void property="dimensiones">
+        <object class="poo.Dimensiones" id="Dimensiones1"/>
+       </void>
+       <void property="listaUnidades">
+        <object class="java.util.ArrayList">
+         <void method="add">
+          <object class="poo.Unidad">
+           <void property="descuento">
+            <double>6.3</double>
+           </void>
+           <void property="dimensiones">
+            <object idref="Dimensiones1"/>
+           </void>
+           <void property="estado">
+            <object class="java.lang.Enum" method="valueOf">
+             <class>poo.Estado</class>
+             <string>reservado</string>
+            </object>
+           </void>
+           <void property="fechaCaducidad">
+            <object idref="GregorianCalendar0"/>
+           </void>
+           <void property="listaUnidades">
+            <object class="java.util.ArrayList"/>
+           </void>
+           <void property="precioCompra">
+            <double>82.0</double>
+           </void>
+           <void property="referencia">
+            <string>SE002</string>
+           </void>
+          </object>
+         </void>
+         <void method="add">
+          <object class="poo.Unidad">
+           <void property="descuento">
+            <double>6.3</double>
+           </void>
+           <void property="dimensiones">
+            <object idref="Dimensiones1"/>
+           </void>
+           <void property="estado">
+            <object class="java.lang.Enum" method="valueOf">
+             <class>poo.Estado</class>
+             <string>vendido</string>
+            </object>
+           </void>
+           <void property="fechaCaducidad">
+            <object idref="GregorianCalendar0"/>
+           </void>
+           <void property="listaUnidades">
+            <object class="java.util.ArrayList"/>
+           </void>
+           <void property="numero">
+            <int>1</int>
+           </void>
+           <void property="precioCompra">
+            <double>82.0</double>
+           </void>
+           <void property="referencia">
+            <string>SE002</string>
+           </void>
+          </object>
+         </void>
+        </object>
+       </void>
+       <void property="precioCompra">
+        <double>82.0</double>
+       </void>
+       <void property="referencia">
+        <string>SE002</string>
+       </void>
+      </object>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="codigo">
+   <string>a1</string>
+  </void>
+  <void property="localizacion">
+   <object class="java.lang.Enum" method="valueOf">
+    <class>poo.Localizacion</class>
+    <string>seco</string>
+   </object>
+  </void>
+ </object>
+</java>

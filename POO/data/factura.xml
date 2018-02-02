@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_121" class="java.beans.XMLDecoder">
+ <object class="poo.Factura" id="Factura0">
+  <void property="cliente">
+   <object class="poo.Cliente">
+    <void property="credito">
+     <double>1500.5</double>
+    </void>
+    <void property="direccion">
+     <string>Calle Pelícano nº7</string>
+    </void>
+    <void property="listaUnidades">
+     <object class="java.util.ArrayList"/>
+    </void>
+    <void property="nif">
+     <string>48576822Y</string>
+    </void>
+    <void property="nombre">
+     <string>Alejandro Maestro</string>
+    </void>
+   </object>
+  </void>
+  <void property="fecha">
+   <void property="time">
+    <object class="java.util.Date">
+     <long>1517178368871</long>
+    </object>
+   </void>
+  </void>
+  <void property="fechaFactura">
+   <object class="java.util.GregorianCalendar">
+    <void property="time">
+     <object class="java.util.Date">
+      <long>1517178368871</long>
+     </object>
+    </void>
+   </object>
+  </void>
+  <void property="formaPago">
+   <object class="java.lang.Enum" method="valueOf">
+    <class>poo.FormaPago</class>
+    <string>contado</string>
+   </object>
+  </void>
+  <void property="numeroAlbaran">
+   <int>1</int>
+  </void>
+  <void property="observaciones">
+   <string>observaciones</string>
+  </void>
+ </object>
+</java>

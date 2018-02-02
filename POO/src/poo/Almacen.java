@@ -8,14 +8,12 @@ public class Almacen {
     public ArrayList <Producto> listaProductos;
     private String codigo;
     private Localizacion localizacion;
-    private IPersistence objDac;
 
     public Almacen(String codigo, Localizacion localizacion) {
         this.codigo = codigo;
         this.localizacion = localizacion;
         listaProductos = new ArrayList<>();
         Listar.listaAlmacenes.add(this);
-        this.objDac = new AlmacenDAC();
     }
 
     public Almacen() {
@@ -43,10 +41,6 @@ public class Almacen {
 
     public void setLocalizacion(Localizacion localizacion) {
         this.localizacion = localizacion;
-    }
-    
-    public void serialize(){
-        this.objDac.xmlSerialize(this);
     }
     
     

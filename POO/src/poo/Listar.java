@@ -10,8 +10,17 @@ public class Listar {
     public static ArrayList <Almacen> listaAlmacenes = new ArrayList<>();
     public static ArrayList <Cliente> listaClientes = new ArrayList<>();
     private static Listar unicaInstancia = null;
+    private final IPersistence dacAlb;
+    private final IPersistence dacAlm;
+    private final IPersistence dacCli;
+    private final IPersistence dacFac;
 
     private Listar() {
+        dacAlb = new AlbaranDAC();
+        dacAlm = new AlmacenDAC();
+        dacCli = new ClienteDAC();
+        dacFac = new FacturaDAC();
+        listaFacturas = this.dacAlb.xmlDeserialize();
     }
     
     public static Listar getIntancia(){
@@ -83,6 +92,10 @@ public class Listar {
     public static void listarClientes(){
         for (Cliente cliente : listaClientes)
             System.out.println(cliente.toString());
+    }
+    
+    public void deserialize(){
+       
     }
     
     

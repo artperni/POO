@@ -1,22 +1,23 @@
 package poo;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class AlbaranDAC  
         extends GlobalDAC
         implements IPersistence, Serializable{
 
     @Override
-    public boolean xmlSerialize(Object obj) {
+    public boolean xmlSerialize(ArrayList<Object> listObj) {
          boolean ok = false;
-        if ( super.xmlSerialize(obj, ALB_SERIALIZE) )
+        if ( super.xmlSerialize(listObj, ALB_SERIALIZE) )
             ok = true;
         return ok;
     }
 
     @Override
-    public boolean xmlDeserialize(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Object xmlDeserialize() {
+        return xmlDeserialize(ALB_SERIALIZE);
     }
     
 }
