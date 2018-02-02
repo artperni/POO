@@ -22,6 +22,9 @@ public class Albaran{
         this.numeroAlbaran = Listar.listaAlbaranes.indexOf(this);
         this.objDac = new AlbaranDAC();
     }
+
+    public Albaran() {
+    }
     
     public Calendar getFecha() {
         return fecha;

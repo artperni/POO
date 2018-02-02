@@ -25,6 +25,10 @@ public class Cliente {
         Listar.listaClientes.add(this);
         this.objDac = new ClienteDAC();
     }
+
+    public Cliente() {
+        this.codigo = null;
+    }
     
 
     public String getNombre() {

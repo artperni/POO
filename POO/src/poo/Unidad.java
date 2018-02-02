@@ -19,6 +19,12 @@ public class Unidad extends Producto{
         p1.actualizar();
     }
 
+    public Unidad() {
+    }
+    
+    
+    
+
     public Estado getEstado() {
         return estado;
     }
