@@ -2,21 +2,21 @@ package poo;
 
 import java.util.*;
 
-/*Vamos a tener en cuenta que no tiene sentido instanciar una Unidad
-que no está vinculada a un producto*/
-public class Unidad extends Producto{
+
+public class Unidad {
     private Estado estado;
     private Calendar fechaCaducidad;
     private int numero;
+    private Producto producto;
 
-    public Unidad(Estado estado, Calendar fechaCaducidad, Producto p1) {
-        super(p1.getReferencia(), p1.getDimensiones(), p1.getPrecioCompra(), p1.getDescuento());
+    public Unidad(Estado estado, Calendar fechaCaducidad, Producto producto) {
         this.estado = estado;
         this.fechaCaducidad = fechaCaducidad;
-        this.numero = p1.getListaUnidades().indexOf(this);
+        this.producto = producto;
+        this.numero = this.producto.getListaUnidades().indexOf(this);
         /*Este numero indica la posicion de la unidad en el producto*/
-        p1.anadirUnidad(this);
-        p1.actualizar();
+        this.producto.anadirUnidad(this);
+        this.producto.actualizar();
     }
 
     public Unidad() {
@@ -37,6 +37,10 @@ public class Unidad extends Producto{
         return numero;
     }
 
+    public Producto getProducto() {
+        return producto;
+    }
+
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
@@ -47,6 +51,10 @@ public class Unidad extends Producto{
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
     
     public boolean isCaducado(Calendar ahora){

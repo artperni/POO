@@ -1,23 +1,40 @@
 package poo;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.ArrayList;
 
 public class AlbaranDAC  
-        extends GlobalDAC
         implements IPersistence, Serializable{
 
     @Override
-    public boolean xmlSerialize(ArrayList<Object> listObj) {
-         boolean ok = false;
-        if ( super.xmlSerialize(listObj, ALB_SERIALIZE) )
-            ok = true;
+    public boolean xmlSerialize(ArrayList listObj) {
+        boolean ok = false;
+        XMLEncoder xmle;
+        try{
+            xmle = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(ALB_SERIALIZE)));
+        }
+        catch(FileNotFoundException fnf){
+            System.out.println("Error creando o abriendo el fichero: "+fnf.getMessage());
+            return ok;
+	}
+        xmle.writeObject(listObj);
+        xmle.close();
+        ok=true;
         return ok;
     }
 
     @Override
-    public Object xmlDeserialize() {
-        return xmlDeserialize(ALB_SERIALIZE);
+    public ArrayList xmlDeserialize() {
+        XMLDecoder xmld=null;
+        try{
+            xmld = new XMLDecoder(new BufferedInputStream(new FileInputStream(ALB_SERIALIZE)));
+        }
+        catch(FileNotFoundException fnf){
+            System.out.println("Error creando o abriendo el fichero: "+fnf.getMessage());
+	}
+        return (ArrayList <Albaran>)xmld.readObject();
     }
     
 }

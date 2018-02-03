@@ -83,7 +83,7 @@ public class Cliente {
     public void devolver(Unidad unidad, Almacen almacen){
         this.listaUnidades.remove(unidad);
         almacen.anadir(unidad);
-        this.credito = this.credito + unidad.getPrecioVenta();
+        this.credito = this.credito + unidad.getProducto().getPrecioVenta();
     }
     
     public void aumentarCredito(double credito){
@@ -92,7 +92,7 @@ public class Cliente {
     
     public void comprarUnidad(Unidad unidad){
         this.listaUnidades.add(unidad);
-        this.credito = this.credito - unidad.getPrecioVenta();
+        this.credito = this.credito - unidad.getProducto().getPrecioVenta();
         unidad.setEstado(Estado.vendido);
     }
 

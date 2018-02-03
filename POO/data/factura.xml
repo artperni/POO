@@ -1,52 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="1.8.0_121" class="java.beans.XMLDecoder">
- <object class="poo.Factura" id="Factura0">
-  <void property="cliente">
-   <object class="poo.Cliente">
-    <void property="credito">
-     <double>1500.5</double>
-    </void>
-    <void property="direccion">
-     <string>Calle Pelícano nº7</string>
-    </void>
-    <void property="listaUnidades">
-     <object class="java.util.ArrayList"/>
-    </void>
-    <void property="nif">
-     <string>48576822Y</string>
-    </void>
-    <void property="nombre">
-     <string>Alejandro Maestro</string>
-    </void>
-   </object>
-  </void>
-  <void property="fecha">
-   <void property="time">
-    <object class="java.util.Date">
-     <long>1517178368871</long>
-    </object>
-   </void>
-  </void>
-  <void property="fechaFactura">
-   <object class="java.util.GregorianCalendar">
-    <void property="time">
-     <object class="java.util.Date">
-      <long>1517178368871</long>
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="poo.Factura">
+    <void property="cliente">
+     <object class="poo.Cliente">
+      <void property="credito">
+       <double>1500.5</double>
+      </void>
+      <void property="direccion">
+       <string>Calle Pelícano nº7</string>
+      </void>
+      <void property="listaUnidades">
+       <object class="java.util.ArrayList"/>
+      </void>
+      <void property="nif">
+       <string>48576822Y</string>
+      </void>
+      <void property="nombre">
+       <string>Alejandro Maestro</string>
+      </void>
      </object>
     </void>
+    <void property="descuento">
+     <double>0.30000000000000004</double>
+    </void>
+    <void property="fecha">
+     <object class="java.util.GregorianCalendar">
+      <void property="time">
+       <object class="java.util.Date">
+        <long>1517687082014</long>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="formaPago">
+     <object class="java.lang.Enum" method="valueOf">
+      <class>poo.FormaPago</class>
+      <string>contado</string>
+     </object>
+    </void>
+    <void property="importeTotal">
+     <double>73.80000000000001</double>
+    </void>
+    <void property="listaCompra">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="poo.Unidad" id="Unidad0">
+        <void property="estado">
+         <object class="java.lang.Enum" id="Estado0" method="valueOf">
+          <class>poo.Estado</class>
+          <string>libre</string>
+         </object>
+        </void>
+        <void property="fechaCaducidad">
+         <object class="java.util.GregorianCalendar" id="GregorianCalendar0">
+          <void property="time">
+           <object class="java.util.Date">
+            <long>1523299481919</long>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="numero">
+         <int>1</int>
+        </void>
+        <void property="producto">
+         <object class="poo.Producto" id="Producto0">
+          <void property="dimensiones">
+           <object class="poo.Dimensiones"/>
+          </void>
+          <void property="listaUnidades">
+           <object class="java.util.ArrayList">
+            <void method="add">
+             <object class="poo.Unidad">
+              <void property="estado">
+               <object idref="Estado0"/>
+              </void>
+              <void property="fechaCaducidad">
+               <object idref="GregorianCalendar0"/>
+              </void>
+              <void property="producto">
+               <object idref="Producto0"/>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object idref="Unidad0"/>
+            </void>
+           </object>
+          </void>
+          <void property="precioCompra">
+           <double>82.0</double>
+          </void>
+          <void property="referencia">
+           <string>SE001</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="poo.Unidad" id="Unidad1">
+        <void property="estado">
+         <object class="java.lang.Enum" method="valueOf">
+          <class>poo.Estado</class>
+          <string>vendido</string>
+         </object>
+        </void>
+        <void property="fechaCaducidad">
+         <object idref="GregorianCalendar0"/>
+        </void>
+        <void property="numero">
+         <int>1</int>
+        </void>
+        <void property="producto">
+         <object class="poo.Producto" id="Producto1">
+          <void property="dimensiones">
+           <object class="poo.Dimensiones"/>
+          </void>
+          <void property="listaUnidades">
+           <object class="java.util.ArrayList">
+            <void method="add">
+             <object class="poo.Unidad">
+              <void property="estado">
+               <object class="java.lang.Enum" method="valueOf">
+                <class>poo.Estado</class>
+                <string>reservado</string>
+               </object>
+              </void>
+              <void property="fechaCaducidad">
+               <object idref="GregorianCalendar0"/>
+              </void>
+              <void property="producto">
+               <object idref="Producto1"/>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object idref="Unidad1"/>
+            </void>
+           </object>
+          </void>
+          <void property="precioCompra">
+           <double>82.0</double>
+          </void>
+          <void property="referencia">
+           <string>SE002</string>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="observaciones">
+     <string>observaciones</string>
+    </void>
    </object>
-  </void>
-  <void property="formaPago">
-   <object class="java.lang.Enum" method="valueOf">
-    <class>poo.FormaPago</class>
-    <string>contado</string>
-   </object>
-  </void>
-  <void property="numeroAlbaran">
-   <int>1</int>
-  </void>
-  <void property="observaciones">
-   <string>observaciones</string>
   </void>
  </object>
 </java>

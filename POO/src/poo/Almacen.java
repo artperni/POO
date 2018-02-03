@@ -33,14 +33,13 @@ public class Almacen {
     public Localizacion getLocalizacion() {
         return localizacion;
     }
-    
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
 
     public void setLocalizacion(Localizacion localizacion) {
         this.localizacion = localizacion;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
     
     
@@ -128,7 +127,7 @@ public class Almacen {
     
     public void anadir(Unidad unidad){
         for (Producto producto : this.listaProductos){
-            if (unidad.getReferencia().equals(producto.getReferencia()))
+            if (unidad.getProducto().getReferencia().equals(producto.getReferencia()))
                 producto.getListaUnidades().add(unidad);
         }
     }
@@ -149,7 +148,7 @@ public class Almacen {
             return false;
         for (Unidad unidad : albaran.getListaCompra()){
             cliente.comprarUnidad(unidad);
-            Listar.totalVendido = Listar.totalVendido + unidad.getPrecioVenta();
+            Listar.totalVendido = Listar.totalVendido + unidad.getProducto().getPrecioVenta();
         }
         return true;
     }

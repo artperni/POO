@@ -9,18 +9,16 @@ public class Producto {
     private int stock;
     private Dimensiones dimensiones;
     private double precioCompra;
-    private double descuento;
     private final double precioVenta;
     private ArrayList <Unidad> listaUnidades;
     
     
     
-    public Producto(String referencia, Dimensiones dimensiones, double precioCompra, double descuento) {
+    public Producto(String referencia, Dimensiones dimensiones, double precioCompra) {
         this.referencia = referencia;
         this.dimensiones = dimensiones;
         this.precioCompra = precioCompra;
-        this.descuento = descuento;
-        this.precioVenta = precioCompra+precioCompra/2-descuento;
+        this.precioVenta = precioCompra+precioCompra/2;
         this.listaUnidades = new ArrayList <> ();
         Listar.listaProductosTotal.add(this);
     }
@@ -50,10 +48,6 @@ public class Producto {
         return precioVenta;
     }
 
-    public double getDescuento() {
-        return descuento;
-    }
-
     public ArrayList<Unidad> getListaUnidades() {
         return listaUnidades;
     }
@@ -68,10 +62,6 @@ public class Producto {
 
     public void setPrecioCompra(double precioCompra) {
         this.precioCompra = precioCompra;
-    }
-
-    public void setDescuento(double descuento) {
-        this.descuento = descuento;
     }
 
     public void setListaUnidades(ArrayList<Unidad> listaUnidades) {

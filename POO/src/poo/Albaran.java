@@ -3,12 +3,12 @@ package poo;
 
 import java.util.*;
 
-public class Albaran{
-    private Calendar fecha;
-    private int numeroAlbaran;
-    private ArrayList <Unidad> listaCompra;
-    private double importeTotal;
-    private Cliente cliente;
+public class Albaran {
+    protected Calendar fecha;
+    protected int numeroAlbaran;
+    protected ArrayList <Unidad> listaCompra;
+    protected double importeTotal;
+    protected Cliente cliente;
 
 
 
@@ -19,6 +19,14 @@ public class Albaran{
         this.cliente = cliente;
         Listar.listaAlbaranes.add(this);
         this.numeroAlbaran = Listar.listaAlbaranes.indexOf(this);
+    }
+
+    public Albaran(Calendar fecha, int numeroAlbaran, ArrayList<Unidad> listaCompra, double importeTotal, Cliente cliente) {
+        this.fecha = fecha;
+        this.numeroAlbaran = numeroAlbaran;
+        this.listaCompra = listaCompra;
+        this.importeTotal = importeTotal;
+        this.cliente = cliente;
     }
 
     public Albaran() {
@@ -75,7 +83,7 @@ public class Albaran{
     
     public void anadirCesta(Unidad unidad){
         this.listaCompra.add(unidad);
-        this.importeTotal+=unidad.getPrecioVenta();
+        this.importeTotal+=unidad.getProducto().getPrecioVenta();
     }
     
 }
