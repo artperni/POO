@@ -1,5 +1,6 @@
 package poo;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Factura 
@@ -74,11 +75,13 @@ public class Factura
             estadoFac="Pagada";
         else
             estadoFac="No pagada";
-        return "\nFecha creacion de la factura: "+this.fecha+
-                "\nObservaciones: "+this.getObservaciones()+
-                "\nForma de pago: "+this.getFormaPago().toString()+"Estado de la factura: "+
-                estadoFac+"\nImporte total: "+this.importeTotal+"€"+
-                "\nDescuento: "+this.descuento*100+"%";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setCalendar(this.fecha);
+        return "Fecha creacion de la factura: "+dateFormat.format(this.fecha.getTime())+
+                "\tObservaciones: "+this.getObservaciones()+
+                "\tForma de pago: "+this.getFormaPago().toString()+"\tEstado de la factura: "+
+                estadoFac+"\tImporte total: "+this.importeTotal+"€"+
+                "\tDescuento: "+this.descuento*100+"%";
     }
     
     

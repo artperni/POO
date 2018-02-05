@@ -1,22 +1,21 @@
 package poo;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
 public class Unidad {
     private Estado estado;
     private Calendar fechaCaducidad;
-    private int numero;
     private Producto producto;
 
     public Unidad(Estado estado, Calendar fechaCaducidad, Producto producto) {
         this.estado = estado;
-        this.fechaCaducidad = fechaCaducidad;
+        this.fechaCaducidad = (Calendar)fechaCaducidad.clone();
         this.producto = producto;
-        this.numero = this.producto.getListaUnidades().indexOf(this);
         /*Este numero indica la posicion de la unidad en el producto*/
         this.producto.anadirUnidad(this);
-        this.producto.actualizar();
+        this.producto.actStock();
     }
 
     public Unidad() {
@@ -33,10 +32,6 @@ public class Unidad {
         return fechaCaducidad;
     }
 
-    public int getNumero() {
-        return numero;
-    }
-
     public Producto getProducto() {
         return producto;
     }
@@ -49,13 +44,11 @@ public class Unidad {
         this.fechaCaducidad = fechaCaducidad;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
+    
+    
     
     public boolean isCaducado(Calendar ahora){
         return ahora.after(this.fechaCaducidad);
@@ -67,26 +60,30 @@ public class Unidad {
     }
     
     public boolean isCaducado(int dias){
+        if ( isCaducado() )
+            return false;
         Calendar fechaActual = Calendar.getInstance();
-        fechaActual.set(Calendar.DAY_OF_MONTH, dias);//Damos unos días de margen a elección
+        fechaActual.add(Calendar.DATE, dias);//Damos unos días de margen a elección
         return isCaducado(fechaActual);
     }
     
     public boolean isLibre(){
-        return this.estado.name().equals("libre");
+        return this.estado.equals(Estado.libre);
     }
     
     public boolean isVendido(){
-           return this.estado.name().equals("vendido");
+           return this.estado.equals(Estado.vendido);
     }
     
     public boolean isReservado(){
-           return this.estado.name().equals("reservado");
+           return this.estado.equals(Estado.reservado);
     }
 
     @Override
     public String toString() {
-        return "Numero de la Unidad: "+this.numero+"Estado: "+this.estado+"\tFecha de Caducidad: "+this.fechaCaducidad.getTime().toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        return "Posicion: "+this.producto.getListaUnidades().indexOf(this)+"\tEstado: "+this.estado+"\tFecha de Caducidad: "+
+                dateFormat.format(this.fechaCaducidad.getTime());
     }
     
 

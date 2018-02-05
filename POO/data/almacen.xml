@@ -11,7 +11,14 @@
        <void method="add">
         <object class="poo.Producto" id="Producto0">
          <void property="dimensiones">
-          <object class="poo.Dimensiones"/>
+          <object class="poo.Dimensiones">
+           <void property="altura">
+            <double>20.78</double>
+           </void>
+           <void property="ancho">
+            <double>47.39</double>
+           </void>
+          </object>
          </void>
          <void property="listaUnidades">
           <object class="java.util.ArrayList">
@@ -24,10 +31,10 @@
               </object>
              </void>
              <void property="fechaCaducidad">
-              <object class="java.util.GregorianCalendar" id="GregorianCalendar0">
+              <object class="java.util.GregorianCalendar">
                <void property="time">
                 <object class="java.util.Date">
-                 <long>1523299481919</long>
+                 <long>1523236413852</long>
                 </object>
                </void>
               </object>
@@ -43,10 +50,13 @@
               <object idref="Estado0"/>
              </void>
              <void property="fechaCaducidad">
-              <object idref="GregorianCalendar0"/>
-             </void>
-             <void property="numero">
-              <int>1</int>
+              <object class="java.util.GregorianCalendar">
+               <void property="time">
+                <object class="java.util.Date">
+                 <long>1864001613852</long>
+                </object>
+               </void>
+              </object>
              </void>
              <void property="producto">
               <object idref="Producto0"/>
@@ -58,15 +68,28 @@
          <void property="precioCompra">
           <double>82.0</double>
          </void>
+         <void property="precioVenta">
+          <double>123.0</double>
+         </void>
          <void property="referencia">
           <string>SE001</string>
+         </void>
+         <void property="stock">
+          <int>2</int>
          </void>
         </object>
        </void>
        <void method="add">
         <object class="poo.Producto" id="Producto1">
          <void property="dimensiones">
-          <object class="poo.Dimensiones"/>
+          <object class="poo.Dimensiones">
+           <void property="altura">
+            <double>20.78</double>
+           </void>
+           <void property="ancho">
+            <double>47.39</double>
+           </void>
+          </object>
          </void>
          <void property="listaUnidades">
           <object class="java.util.ArrayList">
@@ -79,7 +102,13 @@
               </object>
              </void>
              <void property="fechaCaducidad">
-              <object idref="GregorianCalendar0"/>
+              <object class="java.util.GregorianCalendar">
+               <void property="time">
+                <object class="java.util.Date">
+                 <long>3190587213852</long>
+                </object>
+               </void>
+              </object>
              </void>
              <void property="producto">
               <object idref="Producto1"/>
@@ -95,10 +124,13 @@
               </object>
              </void>
              <void property="fechaCaducidad">
-              <object idref="GregorianCalendar0"/>
-             </void>
-             <void property="numero">
-              <int>1</int>
+              <object class="java.util.GregorianCalendar">
+               <void property="time">
+                <object class="java.util.Date">
+                 <long>1523236413852</long>
+                </object>
+               </void>
+              </object>
              </void>
              <void property="producto">
               <object idref="Producto1"/>
@@ -110,8 +142,14 @@
          <void property="precioCompra">
           <double>82.0</double>
          </void>
+         <void property="precioVenta">
+          <double>123.0</double>
+         </void>
          <void property="referencia">
           <string>SE002</string>
+         </void>
+         <void property="stock">
+          <int>2</int>
          </void>
         </object>
        </void>

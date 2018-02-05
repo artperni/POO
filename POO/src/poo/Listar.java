@@ -50,9 +50,12 @@ public class Listar {
     }
     
     public void listarAlbaranes(Calendar fecha){
-        for (Albaran albaran : listaAlbaranes)
-            if (albaran.getFecha().compareTo(fecha)==0)
+        for (Albaran albaran : listaAlbaranes){
+            if ( albaran.getFecha().get(Calendar.DATE) == fecha.get(Calendar.DATE) &&
+                    albaran.getFecha().get(Calendar.MONTH) == fecha.get(Calendar.MONTH) && 
+                    albaran.getFecha().get(Calendar.YEAR) == fecha.get(Calendar.YEAR) )
                 System.out.println(albaran.toString());
+        }
     }
     
     public void listarAlbaranes(int numeroAlb){
@@ -63,7 +66,7 @@ public class Listar {
     
     public void listarTotalVendido(){
         Calendar now = Calendar.getInstance();
-        System.out.println("Total vendido a día de "+now+": "+totalVendido);
+        System.out.println("Total vendido a día de "+now.getTime().toString()+": "+totalVendido+"€");
     }
     
     public void listarFacturasImpagadas(){
@@ -94,6 +97,25 @@ public class Listar {
         for (Cliente cliente : listaClientes)
             System.out.println(cliente.toString());
     }
+    
+    //La referencia de una objeto tendremos en cuenta que debe ser única
+    public Producto getProducto(String referencia){
+        for (Producto producto : listaProductosTotal){
+            if ( producto.getReferencia().equalsIgnoreCase(referencia) )
+                return producto;
+        }
+        return null;
+    }
+    
+    public Almacen getAlmacen(String codigo){
+        for (Almacen almacen : listaAlmacenes){
+            if ( almacen.getCodigo().equalsIgnoreCase(codigo) )
+                return almacen;
+        }
+        return null;
+    }
+    
+    
     
     public void deserialize(){
         listaAlbaranes = dacAlb.xmlDeserialize();

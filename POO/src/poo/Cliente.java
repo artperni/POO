@@ -7,7 +7,7 @@ public class Cliente {
     private String nombre;
     private String nif;
     private String direccion;
-    private final String codigo;
+    private String codigo;
     private double credito;
     private ArrayList <Unidad> listaUnidades;
 
@@ -65,6 +65,10 @@ public class Cliente {
         this.direccion = direccion;
     }
 
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public void setCredito(double credito) {
         this.credito = credito;
     }
@@ -75,7 +79,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "\nNombre del cliente: "+this.nombre+"\tNIF del cliente: "+this.nif+
+        return "Nombre del cliente: "+this.nombre+"\tNIF del cliente: "+this.nif+
                 "\tDirección del cliente: "+this.direccion+"\tCódigo del cliente: "+
                 this.codigo+"\tCrédito del cliente: "+this.credito+"€";
     }
@@ -83,7 +87,8 @@ public class Cliente {
     public void devolver(Unidad unidad, Almacen almacen){
         this.listaUnidades.remove(unidad);
         almacen.anadir(unidad);
-        this.credito = this.credito + unidad.getProducto().getPrecioVenta();
+        /*Se devuelve 3/4 de lo que costó*/
+        this.credito = this.credito + unidad.getProducto().getPrecioVenta() * 0.75;
     }
     
     public void aumentarCredito(double credito){

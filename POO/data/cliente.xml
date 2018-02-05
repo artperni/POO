@@ -3,6 +3,9 @@
  <object class="java.util.ArrayList">
   <void method="add">
    <object class="poo.Cliente">
+    <void property="codigo">
+     <string>48576822YAlejandro Maestro</string>
+    </void>
     <void property="credito">
      <double>1500.5</double>
     </void>
@@ -22,6 +25,9 @@
   </void>
   <void method="add">
    <object class="poo.Cliente">
+    <void property="codigo">
+     <string>72936277AArturo Gomez</string>
+    </void>
     <void property="credito">
      <double>2450.85</double>
     </void>

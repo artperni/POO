@@ -45,7 +45,10 @@ public class Almacen {
     
     
     public int totalProductos(){
-       return this.listaProductos.size();
+        int cont=0;
+        for (Producto producto : this.listaProductos)
+            cont+=producto.getListaUnidades().size();
+       return cont;
     }
     
     public int caducidadProductos(int dias){
@@ -60,7 +63,7 @@ public class Almacen {
         return contadorDias;
     }
     
-    public void estadoProductos(String estado){
+    public void estadoProductos(){
         int contLibre=0,contVendido=0,contReservado=0;
         for (Producto producto : this.listaProductos){
             for (Unidad unidad : producto.getListaUnidades()){
@@ -75,7 +78,7 @@ public class Almacen {
                     producto.getReferencia());
             }
         }
-        System.out.println("\nProductos libres: "+contLibre+"\nProductos vendidos: "+
+        System.out.println("Productos libres: "+contLibre+"\nProductos vendidos: "+
                 contVendido+"\nProductos reservados: "+contReservado);
     }
     
@@ -95,7 +98,7 @@ public class Almacen {
     public void eliminarCaducados(){
         for (Producto producto : this.listaProductos){
             for (Unidad unidad : producto.getListaUnidades()){
-                if(unidad.isCaducado()){
+                if(unidad.isCaducado() && unidad.isLibre()){
                     producto.eliminarUnidad(unidad);
                 }               
             }
@@ -109,15 +112,21 @@ public class Almacen {
     }
     
     public void eliminar(Unidad unidad){
-        for (Producto producto : this.listaProductos)
-            producto.getListaUnidades().remove(unidad);
+        for (Producto producto : this.listaProductos){
+            producto.eliminarUnidad(unidad);
+            if (producto.isVacio())
+                eliminar(producto);
+        }
     }
     
     /*Elimina una unidad concreta del producto con essa referncia*/
     public void eliminar(String referencia, int numero){
         for (Producto producto : this.listaProductos){
-            if (producto.getReferencia().equals(referencia))
-                producto.getListaUnidades().remove(numero);
+            if (producto.getReferencia().equalsIgnoreCase(referencia)){
+                producto.eliminarUnidad(numero);
+                if (producto.isVacio())
+                eliminar(producto);
+            }
         }
     }
     
@@ -126,9 +135,16 @@ public class Almacen {
     }
     
     public void anadir(Unidad unidad){
+        boolean anadido=false;
         for (Producto producto : this.listaProductos){
-            if (unidad.getProducto().getReferencia().equals(producto.getReferencia()))
+            if (unidad.getProducto().equals(producto)){
                 producto.getListaUnidades().add(unidad);
+                anadido = true;
+            }
+        }
+        if ( ! anadido ){
+            anadir(unidad.getProducto());
+            unidad.getProducto().anadirUnidad(unidad);
         }
     }
     
@@ -151,6 +167,14 @@ public class Almacen {
             Listar.totalVendido = Listar.totalVendido + unidad.getProducto().getPrecioVenta();
         }
         return true;
+    }
+    
+    public Producto getProducto(String referencia){
+        for (Producto producto : this.listaProductos){
+            if ( producto.getReferencia().equalsIgnoreCase(referencia) )
+                return producto;
+        }
+        return null;
     }
     
 }

@@ -1,6 +1,7 @@
 package poo;
 
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Albaran {
@@ -75,9 +76,11 @@ public class Albaran {
 
     @Override
     public String toString() {
-        return "Fecha de creación del albarán: "+this.fecha.getTime().toString()+"\nNúmero de albarán: "+this.numeroAlbaran+
-                "\nLista de productos: "+this.listaCompra.toString()+"\nImporte total: "+this.importeTotal+
-                "\nCliente asociado: "+this.cliente.toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setCalendar(this.fecha);
+        return "Número de Albarán: "+this.numeroAlbaran+"\tFecha de creación del Albarán: "+dateFormat.format(this.fecha.getTime())+
+                "\tLista de Productos: "+this.listaCompra.toString()+"\tImporte Total: "+this.importeTotal+"€"+
+                "\tCliente Asociado: "+this.cliente.toString();
     }
 
     

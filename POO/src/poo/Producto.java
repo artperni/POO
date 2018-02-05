@@ -9,7 +9,7 @@ public class Producto {
     private int stock;
     private Dimensiones dimensiones;
     private double precioCompra;
-    private final double precioVenta;
+    private double precioVenta;
     private ArrayList <Unidad> listaUnidades;
     
     
@@ -22,7 +22,6 @@ public class Producto {
         this.listaUnidades = new ArrayList <> ();
         Listar.listaProductosTotal.add(this);
     }
-
     public Producto() {
         this.precioVenta = 0;
     }
@@ -55,6 +54,14 @@ public class Producto {
     public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+    
+    public void actStock() {
+        this.stock = this.listaUnidades.size();
+    }
     
     public void setDimensiones(Dimensiones dimensiones) {
         this.dimensiones = dimensiones;
@@ -67,22 +74,28 @@ public class Producto {
     public void setListaUnidades(ArrayList<Unidad> listaUnidades) {
         this.listaUnidades = listaUnidades;
     }
+
+    public void setPrecioVenta(double precioVenta) {
+        this.precioVenta = precioVenta;
+    }
+    
+    
     
     
 
     @Override
     public String toString() {
-        return "Referencia: "+this.referencia+"\tNumero de producto: "+this.stock+
+        return "Referencia: "+this.referencia+"\tStock: "+this.stock+
                 "\tDimensiones: "+this.dimensiones.toString()+
-                "\tPrecio: "+this.precioVenta+"€"+listaUnidades.toString();
+                "\tPrecio: "+this.precioVenta+"€\t"+this.listaUnidades.toString();
     }
-
     
     
     
     
     public void anadirUnidad(Unidad unidad){
         this.listaUnidades.add(unidad);
+        this.actStock();
     }
     
     public void anadirUnidades(ArrayList <Unidad> listaunidades){
@@ -92,6 +105,12 @@ public class Producto {
     
     public void eliminarUnidad(Unidad unidad){
         this.listaUnidades.remove(unidad);
+        this.actStock();
+    }
+    
+    public void eliminarUnidad(int num){
+        this.listaUnidades.remove(num);
+        this.actStock();
     }
     
     public void eliminarUnidades(ArrayList <Unidad> listaunidades){
@@ -102,12 +121,11 @@ public class Producto {
     public boolean isVacio(){
         return this.listaUnidades.isEmpty();
     }
-    //Pendiente de comprobacion
-    public void actualizar(){
-        this.stock = this.listaUnidades.size();
-        for (Unidad unidad : this.listaUnidades)
-            unidad.setNumero(this.listaUnidades.indexOf(unidad));
-    }
     
+    public Unidad getUnidad(int pos) {
+        if (this.listaUnidades.size() >= pos-1)
+            return this.listaUnidades.get(pos);
+        return null;
+    }
     
 }
