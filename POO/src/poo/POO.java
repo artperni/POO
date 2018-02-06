@@ -27,16 +27,20 @@ public class POO {
             
             Producto p1=new Producto("SE001", new Dimensiones(47.39, 20.78), 82);
             cal.set(2018, 3, 9);
-            Unidad u1=new Unidad(Estado.libre, cal, p1);
+            Unidad u1=new Unidad(cal, p1);
+            u1.getProducto().anadirUnidad(u1);
             cal.set(2028, 12, 25);//Esto lo reconocerá como enero del 2029
-            Unidad u2=new Unidad(Estado.libre, cal, p1);
+            Unidad u2=new Unidad(cal, p1);
+            u2.getProducto().anadirUnidad(u2);
             System.out.println(p1.toString());
             
             Producto p2=new Producto("SE002", new Dimensiones(47.39, 20.78), 82);
             cal.set(2071, 1, 8);
-            Unidad u3=new Unidad(Estado.reservado, cal, p2);
+            Unidad u3=new Unidad(cal, p2);
+            u3.getProducto().anadirUnidad(u3);
             cal.set(2018, 3, 9);
-            Unidad u4=new Unidad(Estado.vendido, cal, p2);
+            Unidad u4=new Unidad(cal, p2);
+            u4.getProducto().anadirUnidad(u4);
             System.out.println(p2.toString());
             
             almacen.anadir(p1);
@@ -60,17 +64,20 @@ public class POO {
         Listar lista = Listar.getIntancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
-                System.out.println("+----- MENU PRINCIPAL -----+");
-                System.out.println("| 1. Gestión de Almacenes  |");
-                System.out.println("| 2. Gestión de Clientes   |");
-                System.out.println("| 3. Listados              |");
-                System.out.println("| 4. Gestión de Usuario    |");
-                System.out.println("| 0. Cerrar sesión         |");
-                System.out.println("+--------------------------+");
+                System.out.println("+-------- MENU PRINCIPAL --------+");
+                System.out.println("| 1. Gestión de Almacenes        |");
+                System.out.println("| 2. Gestión de Clientes         |");
+                System.out.println("| 3. Creación de Nuevo Almacén   |");
+                System.out.println("| 4. Eliminar un Almacén         |");
+                System.out.println("| 5. Listados                    |");
+                System.out.println("| 6. Gestión de Usuario          |");
+                System.out.println("| 0. Cerrar sesión               |");
+                System.out.println("+--------------------------------+");
                 System.out.print("Introduce un opción: ");
                 opcion = Integer.parseInt(br.readLine());
                 switch (opcion) {
                     case 1:
+                        lista.almCodToString();
                         System.out.print("Código del Almacén: ");
                         Almacen alm = lista.getAlmacen(br.readLine());
                         if ( alm != null)
@@ -82,13 +89,37 @@ public class POO {
                         gestionCli();
                         break;
                     case 3:
-                        listados();
+                        lista.almCodToString();
+                        System.out.print("Código del Almacén: ");
+                        String codigo = br.readLine();
+                        if ( lista.getAlmacen(codigo) != null )
+                            System.out.println("El Almacén Seleccionado Ya Existe");
+                        else{
+                            System.out.print("Localización del Almacén: ");
+                            new Almacen(codigo, Localizacion.valueOf(br.readLine()));
+                        }
                         break;
                     case 4:
+                        lista.almCodToString();
+                        System.out.print("Código del Almacén: ");
+                        alm = lista.getAlmacen(br.readLine());
+                        if ( alm != null )
+                            if (Listar.listaAlmacenes.remove(alm) )
+                                System.out.println("Almacén Eliminado con éxito");
+                            else
+                                System.out.println("El Almacén no se pudo Eliminar");
+                        else
+                            System.out.println("El Almacén no Existe");
+                        break;
+                    case 5:
+                        listados();
+                        break;
+                    case 6:
                         gestionUser();
                         break;
                     case 0:
                         System.out.println("Sesión cerrada. Hasta luego");
+                        lista.serialize();
                         System.exit(0);
                         //logIn();
                         break;
@@ -123,8 +154,11 @@ public class POO {
                 opcion = Integer.parseInt(br.readLine());
                 switch (opcion) {
                     case 1:
-                        for (Producto producto : almacen.listaProductos)
-                            System.out.println(producto.toString());
+                        if (almacen.totalProductos() == 0)
+                            System.out.println("El Almacén no tiene Productos");
+                        else
+                            for (Producto producto : almacen.getListaProductos())
+                                System.out.println(producto.toString());
                         break;
                     case 2:
                         System.out.println(almacen.totalProductos());
@@ -140,19 +174,35 @@ public class POO {
                         System.out.println(almacen.libreCaducadoProductos());
                         break;
                     case 6:
-                        almacen.eliminarCaducados();
+                        if ( ! almacen.eliminarCaducados() )
+                            System.out.println("No se pudo Eliminar Correctamente");
+                        else
+                            System.out.println("Limpieza Completada");
                         break;
                     case 7:
+                        for (Producto producto : almacen.getListaProductos())
+                            System.out.println(producto.toStringRef());
                         System.out.print("Referencia del Producto: ");
                         String ref= br.readLine();
-                        System.out.print("Posición de la Unidad a Eliminar: ");
-                        almacen.eliminar(ref, Integer.parseInt(br.readLine()));
+                        if ( almacen.getProducto(ref) == null )
+                            System.out.println("La Referencia No Coincide con ningún Producto del Almacén");
+                        else{
+                            System.out.println(almacen.getProducto(ref).toStringUnid());
+                            System.out.print("Posición de la Unidad a Eliminar: ");
+                            if (almacen.eliminar(ref, Integer.parseInt(br.readLine())) )
+                                System.out.println("Producto Eliminado con éxito");
+                            else
+                                System.out.println("La Posición de la Unidad no es Válida");
+                        }
+                        
                         break;
                     case 8:
+                        for (Producto producto : almacen.getListaProductos())
+                            System.out.println(producto.toStringRef());
                         System.out.print("Referencia del Producto: ");
                         ref = br.readLine();
                         Producto p1 = almacen.getProducto(ref);
-                        if ( p1 == null ){//si el producto ya existe pero queremos añadir una unidad a este
+                        if ( p1 == null ){
                             System.out.print("Ancho del Producto: ");
                             Double ancho = Double.parseDouble(br.readLine());
                             System.out.print("Alto del Producto: ");
@@ -160,36 +210,58 @@ public class POO {
                                     Double.parseDouble(br.readLine()));
                             System.out.print("Precio de Compra del Producto: ");
                             Double precioComp = Double.parseDouble(br.readLine());
-                            System.out.print("Estado del Producto: ");
-                            Estado estado = Estado.valueOf(br.readLine());
                             System.out.print("Fecha de Caducidad del Producto\nDía: ");
                             int dia = Integer.parseInt(br.readLine());
                             System.out.print("Mes: ");
                             int mes = Integer.parseInt(br.readLine());
                             System.out.print("Año: ");
                             Calendar cal = new GregorianCalendar(Integer.parseInt(
-                                    br.readLine()), mes, dia);
-                            Unidad unidad = new Unidad(estado, cal,
-                                    new Producto(ref, dimensiones, precioComp));
-                            almacen.anadir(unidad);
+                                    br.readLine()), mes-1, dia);
+                            if ( almacen.anadir( new Unidad(cal,
+                                    new Producto(ref, dimensiones, precioComp))) )
+                                System.out.println("Producto añadido con éxito");
+                            else
+                                System.out.println("No se pudo añadir el Producto");
                         }
-                        else{
-                            System.out.print("Estado del Producto: ");
-                            Estado estado = Estado.valueOf(br.readLine());
+                        else{//si el producto ya existe pero queremos añadir una unidad a este
                             System.out.print("Fecha de Caducidad del Producto\nDía: ");
                             int dia = Integer.parseInt(br.readLine());
                             System.out.print("Mes: ");
                             int mes = Integer.parseInt(br.readLine());
                             System.out.print("Año: ");
                             Calendar cal = new GregorianCalendar(
-                                    Integer.parseInt(br.readLine()), mes, dia);
-                            Unidad unidad = new Unidad(estado, cal, p1);
-                            almacen.anadir(unidad);
+                                    Integer.parseInt(br.readLine()), mes-1, dia);
+                            if ( almacen.anadir(new Unidad(cal, p1)) )
+                                System.out.println("Producto añadido con éxito");
+                            else
+                                System.out.println("No se pudo añadir el Producto");
                         }
                         break;
                     case 9:
+                        for (Producto producto : almacen.getListaProductos())
+                            System.out.println(producto.toStringRef());
+                        System.out.print("Referencia del Producto: ");
+                        p1 = almacen.getProducto(br.readLine());
+                        if ( p1 == null )
+                            System.out.println("La Referencia No Coincide con ningún Producto del Almacén");
+                        else{
+                            lista.almCodToString(almacen);
+                            System.out.print("Código del Almacén al que se va a Trasladar: ");
+                            if ( ! almacen.trasladar(p1, lista.getAlmacen(br.readLine())) )
+                                System.out.println("Error Trasladando");
+                            else
+                                System.out.println("Producto trasladado con éxito");
+                        }
                         break;
                     case 10:
+                        lista.cliToString();
+                        System.out.print("Dni o Nombre del Cliente que va a Realizar una Compra: ");
+                        if ( almacen.vender(lista.getCliente(br.readLine())) )
+                            System.out.println("Albarán creado. En Gestión de Clientes"
+                                    + " se puede realizar la Facturación pertinente");
+                        else
+                            System.out.println("El Producto No se Encuentra o No Dispone"
+                        + "de Unidades Libres");
                         break;
                     case 0:
                         menuPrincipal();
@@ -373,6 +445,8 @@ public class POO {
                         lista.listarFacturasImpagadas();
                         break;
                     case 2:
+                        for (Cliente cliente : Listar.listaClientes)
+                            System.out.println(cliente.getNombre()+"\t"+cliente.getNif());
                         System.out.print("DNI del Cliente: ");
                         lista.listarFacturas(br.readLine());
                         break;

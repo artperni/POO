@@ -1,6 +1,9 @@
 package poo;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 
@@ -41,14 +44,16 @@ public class Almacen {
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
+
+    public void setListaProductos(ArrayList<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+    
     
     
     
     public int totalProductos(){
-        int cont=0;
-        for (Producto producto : this.listaProductos)
-            cont+=producto.getListaUnidades().size();
-       return cont;
+       return this.listaProductos.size();
     }
     
     public int caducidadProductos(int dias){
@@ -95,76 +100,100 @@ public class Almacen {
     }
     
     
-    public void eliminarCaducados(){
+    public boolean eliminarCaducados(){
+        ArrayList <Unidad> listaUnidades = new ArrayList();
         for (Producto producto : this.listaProductos){
             for (Unidad unidad : producto.getListaUnidades()){
-                if(unidad.isCaducado() && unidad.isLibre()){
-                    producto.eliminarUnidad(unidad);
-                }               
+                if(unidad.isCaducado() && unidad.isLibre())
+                    listaUnidades.add(unidad);
             }
             if (producto.isVacio())
                 eliminar(producto);
+            if(listaUnidades.size()==this.libreCaducadoProductos()){
+                for (Unidad unidad : listaUnidades)
+                    unidad.eliminarUnidad();
+                return true;
+            }
+                
         }
+        return false;
     }
     
-    public void eliminar(Producto producto){
+    public boolean eliminar(Producto producto){
         this.listaProductos.remove(producto);
+        return Listar.listaProductosTotal.remove(producto);
     }
     
-    public void eliminar(Unidad unidad){
+    public boolean eliminar(Unidad unidad){
         for (Producto producto : this.listaProductos){
             producto.eliminarUnidad(unidad);
-            if (producto.isVacio())
+            if (producto.isVacio()){
                 eliminar(producto);
+                return true;
+            }
         }
+        return false;
     }
     
-    /*Elimina una unidad concreta del producto con essa referncia*/
-    public void eliminar(String referencia, int numero){
+    /*Elimina una unidad concreta del producto con esa referencia*/
+    public boolean eliminar(String referencia, int numero){
         for (Producto producto : this.listaProductos){
             if (producto.getReferencia().equalsIgnoreCase(referencia)){
                 producto.eliminarUnidad(numero);
-                if (producto.isVacio())
-                eliminar(producto);
+                if (producto.isVacio()){
+                    eliminar(producto);
+                    return true;
+                }
+                else
+                    return true;
             }
         }
+        return false;
     }
     
-    public void anadir(Producto producto){
-        this.listaProductos.add(producto);
+    public boolean anadir(Producto producto){
+        return this.listaProductos.add(producto);
     }
     
-    public void anadir(Unidad unidad){
-        boolean anadido=false;
+    public boolean anadir(Unidad unidad){
         for (Producto producto : this.listaProductos){
-            if (unidad.getProducto().equals(producto)){
-                producto.getListaUnidades().add(unidad);
-                anadido = true;
+            if (unidad.getProducto().getReferencia().equalsIgnoreCase(producto.getReferencia())){
+                return producto.anadirUnidad(unidad);
             }
         }
-        if ( ! anadido ){
-            anadir(unidad.getProducto());
-            unidad.getProducto().anadirUnidad(unidad);
-        }
+        this.anadir(unidad.getProducto());
+        return unidad.getProducto().anadirUnidad(unidad);
     }
     
     /*this.almacen es el almacen que contiene el producto a trasladar y
     "almacen" es el almacen que contendrá en el futuro a "producto".
-    Trasladamos un producto entero con todas sus unidades, de tener alguna*/
-    public void trasladar(Producto producto, Almacen almacen){
+    Trasladamos un Producto entero con sus unidades correspondientes*/
+    public boolean trasladar(Producto producto, Almacen almacen){
         this.eliminar(producto);
-        almacen.anadir(producto);
+        return almacen.anadir(producto);
     }
     
     /*devuelve false si no se puede completar la venta y true cuando se realice
     con exito*/
-    public boolean vender(Cliente cliente){
+    public boolean vender(Cliente cliente) throws IOException{
         Albaran albaran = new Albaran(cliente);
-        if (albaran.getImporteTotal() > cliente.getCredito())
-            return false;
-        for (Unidad unidad : albaran.getListaCompra()){
-            cliente.comprarUnidad(unidad);
-            Listar.totalVendido = Listar.totalVendido + unidad.getProducto().getPrecioVenta();
+        String opcion;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        do{
+            this.prodLibresToString();
+            System.out.print("Referencia del Producto: ");
+            Unidad u1 = this.getProducto(br.readLine()).getUnidadLibre();
+            if ( u1 != null )
+                albaran.anadirCesta(u1);
+            else
+                return false;
+            do{
+                System.out.print("Continuar? [s,n]: ");
+                opcion = br.readLine();
+            } while ( ! opcion.equalsIgnoreCase("s") && ! opcion.equalsIgnoreCase("n") );
+        } while (opcion.equalsIgnoreCase("s"));
+        if ( albaran.isVacio() ){
+            Listar.listaAlbaranes.remove(albaran);
         }
         return true;
     }
@@ -175,6 +204,12 @@ public class Almacen {
                 return producto;
         }
         return null;
+    }
+    
+    public void prodLibresToString(){
+        for (Producto producto : this.listaProductos)
+            if ( producto.isLibre() )
+                System.out.println(producto.toStringRef()+"\tx"+producto.getStock());
     }
     
 }

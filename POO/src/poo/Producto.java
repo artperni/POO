@@ -22,9 +22,15 @@ public class Producto {
         this.listaUnidades = new ArrayList <> ();
         Listar.listaProductosTotal.add(this);
     }
-    public Producto() {
-        this.precioVenta = 0;
+    public Producto(String referencia) {
+        this.referencia = referencia;
+        this.listaUnidades = new ArrayList <> ();
+        Listar.listaProductosTotal.add(this);
     }
+
+    public Producto() {
+    }
+    
     
 
     public String getReferencia() {
@@ -60,7 +66,7 @@ public class Producto {
     }
     
     public void actStock() {
-        this.stock = this.listaUnidades.size();
+        this.stock = this.getUnidadesLibres();
     }
     
     public void setDimensiones(Dimensiones dimensiones) {
@@ -90,12 +96,21 @@ public class Producto {
                 "\tPrecio: "+this.precioVenta+"€\t"+this.listaUnidades.toString();
     }
     
+    public String toStringRef() {
+        return "Referencia: "+this.referencia;
+    }
+    
+    public String toStringUnid() {
+        return this.listaUnidades.toString();
+    }
     
     
     
-    public void anadirUnidad(Unidad unidad){
+    
+    public boolean anadirUnidad(Unidad unidad){
         this.listaUnidades.add(unidad);
         this.actStock();
+        return true;
     }
     
     public void anadirUnidades(ArrayList <Unidad> listaunidades){
@@ -108,9 +123,10 @@ public class Producto {
         this.actStock();
     }
     
-    public void eliminarUnidad(int num){
+    public boolean eliminarUnidad(int num){
         this.listaUnidades.remove(num);
         this.actStock();
+        return true;
     }
     
     public void eliminarUnidades(ArrayList <Unidad> listaunidades){
@@ -126,6 +142,29 @@ public class Producto {
         if (this.listaUnidades.size() >= pos-1)
             return this.listaUnidades.get(pos);
         return null;
+    }
+    
+    /*El método coge la primera Unidad libre encontrada en el Producto*/
+    public Unidad getUnidadLibre() {
+        for (Unidad unidad : this.listaUnidades)
+            if( unidad.isLibre() )
+                return unidad;
+        return null;
+    }
+    
+    public int getUnidadesLibres() {
+        int cont=0;
+        for (Unidad unidad : this.listaUnidades)
+            if( unidad.isLibre() )
+                cont++;
+        return cont;
+    }
+    
+    /*Método para comprobar que un producto tiene al menos una Unidad libre*/
+    public boolean isLibre(){
+        for (Unidad unidad : this.listaUnidades)
+            return unidad.isLibre();
+        return false;
     }
     
 }

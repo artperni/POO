@@ -1,5 +1,8 @@
 package poo;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 
@@ -97,8 +100,27 @@ public class Cliente {
     
     public void comprarUnidad(Unidad unidad){
         this.listaUnidades.add(unidad);
-        this.credito = this.credito - unidad.getProducto().getPrecioVenta();
         unidad.setEstado(Estado.vendido);
+    }
+    
+    public void comprarUnidad(ArrayList <Unidad> listaUnidades, double precio){
+        for(Unidad unidad : listaUnidades)
+            this.comprarUnidad(unidad);
+        this.credito-=precio;
+        Listar.totalVendido = Listar.totalVendido + precio;
+    }
+    
+    public void facturar(Albaran albaran) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Listar lista = Listar.getIntancia();
+        System.out.print("Forma de Pago: ");
+        FormaPago fmpg = FormaPago.valueOf(br.readLine());
+        System.out.print("Observaciones de la Factura: ");
+        String obs = br.readLine();
+        if ( lista.getAlbaran(this) != null ){
+            Factura factura = new Factura(obs, fmpg, lista.getAlbaran(this));
+            this.comprarUnidad(factura.listaCompra, factura.importeTotal);
+        }
     }
 
     

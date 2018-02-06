@@ -32,7 +32,7 @@
      <object class="java.util.GregorianCalendar">
       <void property="time">
        <object class="java.util.Date">
-        <long>1517796813924</long>
+        <long>1517924235195</long>
        </object>
       </void>
      </object>
@@ -44,7 +44,7 @@
      </object>
     </void>
     <void property="importeTotal">
-     <double>73.80000000000001</double>
+     <double>172.2</double>
     </void>
     <void property="listaCompra">
      <object class="java.util.ArrayList">
@@ -60,7 +60,7 @@
          <object class="java.util.GregorianCalendar">
           <void property="time">
            <object class="java.util.Date">
-            <long>1864001613852</long>
+            <long>1864042635117</long>
            </object>
           </void>
          </object>
@@ -88,7 +88,7 @@
                <object class="java.util.GregorianCalendar">
                 <void property="time">
                  <object class="java.util.Date">
-                  <long>1523236413852</long>
+                  <long>1523277435117</long>
                  </object>
                 </void>
                </object>
@@ -122,16 +122,13 @@
       <void method="add">
        <object class="poo.Unidad" id="Unidad1">
         <void property="estado">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>poo.Estado</class>
-          <string>vendido</string>
-         </object>
+         <object idref="Estado0"/>
         </void>
         <void property="fechaCaducidad">
          <object class="java.util.GregorianCalendar">
           <void property="time">
            <object class="java.util.Date">
-            <long>1523236413852</long>
+            <long>1523277435117</long>
            </object>
           </void>
          </object>
@@ -153,16 +150,13 @@
             <void method="add">
              <object class="poo.Unidad">
               <void property="estado">
-               <object class="java.lang.Enum" method="valueOf">
-                <class>poo.Estado</class>
-                <string>reservado</string>
-               </object>
+               <object idref="Estado0"/>
               </void>
               <void property="fechaCaducidad">
                <object class="java.util.GregorianCalendar">
                 <void property="time">
                  <object class="java.util.Date">
-                  <long>3190587213852</long>
+                  <long>3190628235117</long>
                  </object>
                 </void>
                </object>

@@ -1,5 +1,6 @@
 package poo;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Listar {
@@ -66,7 +67,8 @@ public class Listar {
     
     public void listarTotalVendido(){
         Calendar now = Calendar.getInstance();
-        System.out.println("Total vendido a día de "+now.getTime().toString()+": "+totalVendido+"€");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println("Total vendido a día de "+dateFormat.format(now.getTime())+": "+totalVendido+"€");
     }
     
     public void listarFacturasImpagadas(){
@@ -113,6 +115,41 @@ public class Listar {
                 return almacen;
         }
         return null;
+    }
+    
+    public Cliente getCliente(String dato){
+        for (Cliente cliente : listaClientes){
+            if ( cliente.getNif().equalsIgnoreCase(dato) ||  
+                    cliente.getNombre().equalsIgnoreCase(dato) )
+                return cliente;
+        }
+        return null;
+    }
+    
+    public Albaran getAlbaran(Cliente cliente){
+        for (Albaran albaran : listaAlbaranes){
+            /*Si un cliente tiene asociados varios albaranes, solo cogemos la primera
+            coincidencia*/
+            if ( albaran.cliente.equals(cliente) )
+                return albaran;
+        }
+        return null;
+    }
+    
+    public void almCodToString(){
+        for ( Almacen alm : Listar.listaAlmacenes )
+            System.out.println(alm.getCodigo());
+    }
+    
+    public void almCodToString(Almacen almacen){
+        for ( Almacen alm : Listar.listaAlmacenes )
+            if ( ! alm.equals(almacen) )
+                System.out.println(alm.getCodigo());
+    }
+    
+    public void cliToString(){
+        for ( Cliente cli : Listar.listaClientes )
+                System.out.println(cli.getNombre()+"\t"+cli.getNif());
     }
     
     

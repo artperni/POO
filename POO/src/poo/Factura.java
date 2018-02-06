@@ -27,7 +27,7 @@ public class Factura
             this.descuento = this.descuento + 0.1;
         if ( this.importeTotal > 300 )
             this.descuento = this.descuento + 0.15;
-        this.importeTotal = this.importeTotal * this.descuento;
+        this.importeTotal -= this.importeTotal * this.descuento;
         Listar.listaFacturas.add(this);
     }
 
@@ -81,7 +81,8 @@ public class Factura
                 "\tObservaciones: "+this.getObservaciones()+
                 "\tForma de pago: "+this.getFormaPago().toString()+"\tEstado de la factura: "+
                 estadoFac+"\tImporte total: "+this.importeTotal+"€"+
-                "\tDescuento: "+this.descuento*100+"%";
+                "\tDescuento: "+this.descuento*100+"%"+"\tCliente: "+super.cliente+
+                "\tLista de la Compra: "+super.listaCompra;
     }
     
     

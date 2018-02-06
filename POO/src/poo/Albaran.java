@@ -87,6 +87,11 @@ public class Albaran {
     public void anadirCesta(Unidad unidad){
         this.listaCompra.add(unidad);
         this.importeTotal+=unidad.getProducto().getPrecioVenta();
+        unidad.setEstado(Estado.reservado);
+    }
+    
+    public boolean isVacio(){
+        return this.listaCompra.isEmpty();
     }
     
 }

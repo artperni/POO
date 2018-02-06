@@ -9,13 +9,10 @@ public class Unidad {
     private Calendar fechaCaducidad;
     private Producto producto;
 
-    public Unidad(Estado estado, Calendar fechaCaducidad, Producto producto) {
-        this.estado = estado;
+    public Unidad(Calendar fechaCaducidad, Producto producto) {
+        this.estado = Estado.libre;
         this.fechaCaducidad = (Calendar)fechaCaducidad.clone();
         this.producto = producto;
-        /*Este numero indica la posicion de la unidad en el producto*/
-        this.producto.anadirUnidad(this);
-        this.producto.actStock();
     }
 
     public Unidad() {
@@ -78,6 +75,11 @@ public class Unidad {
     public boolean isReservado(){
            return this.estado.equals(Estado.reservado);
     }
+    
+    public void eliminarUnidad(){
+        this.producto.getListaUnidades().remove(this);
+        this.producto.actStock();
+    }
 
     @Override
     public String toString() {
@@ -85,6 +87,5 @@ public class Unidad {
         return "Posicion: "+this.producto.getListaUnidades().indexOf(this)+"\tEstado: "+this.estado+"\tFecha de Caducidad: "+
                 dateFormat.format(this.fechaCaducidad.getTime());
     }
-    
 
 }
