@@ -163,7 +163,8 @@ public class Producto {
     /*Método para comprobar que un producto tiene al menos una Unidad libre*/
     public boolean isLibre(){
         for (Unidad unidad : this.listaUnidades)
-            return unidad.isLibre();
+            if ( unidad.isLibre() ) 
+                return true;
         return false;
     }
     

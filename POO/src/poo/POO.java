@@ -8,56 +8,33 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+/*
+*****Práctica Final Programación Orientada a Objetos*****
+****************2º Ingeniería Informática****************
+*************************AUTORES*************************
+**********************Arturo Gómez***********************
+********************Alejandro Maestro********************
+*********************Miguel Vítores**********************
+*************************AUTORES*************************
+
+
+
+Para iniciar sesión por primera vez hay que hacerlo como
+**********usuario: poo**********
+********contraseña: 1234********
+Este usuario además no se puede borrar
+*/
+
 public class POO {
 
     public static void main(String[] args) throws IOException{
         Listar lista = Listar.getIntancia();
         lista.deserialize();
-        
-        menuPrincipal();
-            
-            
-            /*Test*/
-            /*Calendar cal = Calendar.getInstance();
-            
-            Almacen almacen = new Almacen("AL-001", Localizacion.seco);
-            
-            Cliente cli1 = new Cliente("Alejandro Maestro", "48576822Y", "Calle Pelícano nº7", 1500.5);
-            System.out.println(cli1.toString());
-            
-            Producto p1=new Producto("SE001", new Dimensiones(47.39, 20.78), 82);
-            cal.set(2018, 3, 9);
-            Unidad u1=new Unidad(cal, p1);
-            u1.getProducto().anadirUnidad(u1);
-            cal.set(2028, 12, 25);//Esto lo reconocerá como enero del 2029
-            Unidad u2=new Unidad(cal, p1);
-            u2.getProducto().anadirUnidad(u2);
-            System.out.println(p1.toString());
-            
-            Producto p2=new Producto("SE002", new Dimensiones(47.39, 20.78), 82);
-            cal.set(2071, 1, 8);
-            Unidad u3=new Unidad(cal, p2);
-            u3.getProducto().anadirUnidad(u3);
-            cal.set(2018, 3, 9);
-            Unidad u4=new Unidad(cal, p2);
-            u4.getProducto().anadirUnidad(u4);
-            System.out.println(p2.toString());
-            
-            almacen.anadir(p1);
-            almacen.anadir(p2);
-            
-            Albaran alb=new Albaran(cli1);
-            alb.anadirCesta(u2);
-            alb.anadirCesta(u4);
-            System.out.println(alb.toString());
-            Factura fac=new Factura("observaciones", FormaPago.contado, alb);
-            Cliente cli2 = new Cliente("Arturo Gomez", "72936277A", "Camino Viejo de Simancas nº23", 2450.85);
-            
-            lista.serialize();
-            /*Test*/
-        
-        
+        logIn();
     }
+    
+    
+    
     
     public static void menuPrincipal() throws IOException{
         int opcion;
@@ -69,8 +46,10 @@ public class POO {
                 System.out.println("| 2. Gestión de Clientes         |");
                 System.out.println("| 3. Creación de Nuevo Almacén   |");
                 System.out.println("| 4. Eliminar un Almacén         |");
-                System.out.println("| 5. Listados                    |");
-                System.out.println("| 6. Gestión de Usuario          |");
+                System.out.println("| 5. Creación de Nuevo Cliente   |");
+                System.out.println("| 6. Eliminar un Cliente         |");
+                System.out.println("| 7. Listados                    |");
+                System.out.println("| 8. Gestión de Usuario          |");
                 System.out.println("| 0. Cerrar sesión               |");
                 System.out.println("+--------------------------------+");
                 System.out.print("Introduce un opción: ");
@@ -86,42 +65,43 @@ public class POO {
                             System.out.println("No se encontró ese Almacén");
                         break;
                     case 2:
-                        gestionCli();
+                        lista.cliToString();
+                        System.out.print("Dni o Nombre del Cliente: ");
+                        Cliente cli = lista.getCliente(br.readLine());
+                        if ( cli != null)
+                            gestionCli(cli);
+                        else
+                            System.out.println("No se encontró ese Cliente en la Base de Datos");
                         break;
                     case 3:
-                        lista.almCodToString();
-                        System.out.print("Código del Almacén: ");
-                        String codigo = br.readLine();
-                        if ( lista.getAlmacen(codigo) != null )
-                            System.out.println("El Almacén Seleccionado Ya Existe");
-                        else{
-                            System.out.print("Localización del Almacén: ");
-                            new Almacen(codigo, Localizacion.valueOf(br.readLine()));
-                        }
+                        creacionAlmacen();
                         break;
                     case 4:
-                        lista.almCodToString();
-                        System.out.print("Código del Almacén: ");
-                        alm = lista.getAlmacen(br.readLine());
-                        if ( alm != null )
-                            if (Listar.listaAlmacenes.remove(alm) )
-                                System.out.println("Almacén Eliminado con éxito");
-                            else
-                                System.out.println("El Almacén no se pudo Eliminar");
-                        else
-                            System.out.println("El Almacén no Existe");
+                        eliminacionAlmacen();
                         break;
                     case 5:
-                        listados();
+                        creacionCliente();
                         break;
                     case 6:
-                        gestionUser();
+                        eliminacionCliente();
+                        break;
+                    case 7:
+                        listados();
+                        break;
+                    case 8:
+                        System.out.print("Nombre de usuario: ");
+                        String nombre = br.readLine();
+                        System.out.print("Contraseña: ");
+                        String passwd = br.readLine();
+                        Usuario u1 = lista.getUsuario(nombre, passwd);
+                        if ( u1 == null )
+                            System.out.println("Usuario o Contraseña Incorrectos");
+                        else
+                            gestionUser(u1);
                         break;
                     case 0:
                         System.out.println("Sesión cerrada. Hasta luego");
-                        lista.serialize();
-                        System.exit(0);
-                        //logIn();
+                        logIn();
                         break;
                     default:
                         System.out.println("Opción incorrecta, pruebe de nuevo");
@@ -130,6 +110,75 @@ public class POO {
             } while (opcion != 0);
         }
         
+    }
+    
+    public static void creacionAlmacen() throws IOException{
+        Listar lista = Listar.getIntancia();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        lista.almCodToString();
+        System.out.print("Código del Almacén: ");
+        String codigo = br.readLine();
+        if ( lista.getAlmacen(codigo) != null )
+            System.out.println("El Almacén Seleccionado Ya Existe");
+        else{
+            System.out.print("Localización del Almacén: ");
+            new Almacen(codigo, Localizacion.valueOf(br.readLine()));
+            System.out.println("Almacén Creado con éxito");
+        }
+    }
+    
+    public static void eliminacionAlmacen() throws IOException{
+        Listar lista = Listar.getIntancia();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        lista.almCodToString();
+        System.out.print("Código del Almacén: ");
+        Almacen alm = lista.getAlmacen(br.readLine());
+        if ( alm != null )
+            if (Listar.listaAlmacenes.remove(alm) )
+                System.out.println("Almacén Eliminado con éxito");
+            else
+                System.out.println("El Almacén no se pudo Eliminar");
+        else
+            System.out.println("El Almacén no Existe");
+    }
+    
+    public static void creacionCliente() throws IOException{
+        Listar lista = Listar.getIntancia();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        lista.cliToString();
+        System.out.print("Nombre del Cliente: ");
+        String nombre = br.readLine();
+        if ( lista.getCliente(nombre) != null )
+            System.out.println("El Cliente Seleccionado Ya Existe");
+        else{
+            System.out.print("Dni del Cliente: ");
+            String dni = br.readLine();
+            if ( lista.getCliente(dni) != null )
+               System.out.println("El Cliente Seleccionado Ya Existe");
+            else{
+                System.out.print("Dirección del Cliente: ");
+                String direccion = br.readLine();
+                System.out.print("Dinero Inicial del Cliente: ");
+                double dinero = Double.parseDouble(br.readLine());
+                new Cliente(nombre, dni, direccion, dinero);
+                System.out.println("Cliente Creado con éxito");
+            }
+        }
+    }
+    
+    public static void eliminacionCliente() throws IOException{
+        Listar lista = Listar.getIntancia();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        lista.cliToString();
+        System.out.print("Nombre o Dni del Cliente: ");
+        Cliente cli = lista.getCliente(br.readLine());
+        if ( cli != null )
+            if ( Listar.listaClientes.remove(cli) )
+                System.out.println("Cliente Eliminado con éxito");
+            else
+                System.out.println("El Cliente no se pudo Eliminar");
+        else
+            System.out.println("El Cliente no Existe");
     }
     
     public static void gestionAlm(Almacen almacen) throws IOException{
@@ -274,24 +323,60 @@ public class POO {
         }
     }
     
-    public static void gestionCli() throws IOException{
+    public static void gestionCli(Cliente cliente) throws IOException{
         int opcion;
+        Listar lista = Listar.getIntancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
-                System.out.println("+----- GESTION DE CLIENTES -----+");
-                System.out.println("| 1.   |");
-                System.out.println("| 2.   |");
-                System.out.println("| 3.     |");
-                System.out.println("| 0. Volver         |");
-                System.out.println("+--------------------------+");
+                System.out.println("+-------- GESTION DE CLIENTES --------+");
+                System.out.println("| 1. Facturar                         |");
+                System.out.println("| 2. Proporcionar Aumento de Crédito  |");
+                System.out.println("| 3. Devolver Artículo                |");
+                System.out.println("| 4. Pagar Factura                    |");
+                System.out.println("| 0. Volver                           |");
+                System.out.println("+-------------------------------------+");
                 System.out.print("Introduce un opción: ");
                 opcion = Integer.parseInt(br.readLine());
                 switch (opcion) {
                     case 1:
+                        if ( lista.getAlbaranes(cliente).isEmpty() )
+                            System.out.println("El Cliente no Tiene Albaranes");
+                        else{
+                            lista.albCliToString(cliente);
+                            System.out.print("Número del Albarán: ");
+                            if ( ! cliente.facturar(cliente.getAlbaran(Integer.parseInt(br.readLine()))) )
+                                System.out.println("No se ha Podido Completar la Facturación");
+                            else
+                                System.out.println("Facturación Realizada con éxito");
+                        }
                         break;
                     case 2:
+                        System.out.println("Crédito Actual: "+cliente.getCredito()+"€");
+                        System.out.print("Crédito(€): ");
+                        if ( ! cliente.aumentarCredito(Double.parseDouble(br.readLine())) )
+                            System.out.println("No se ha Podido Realizar el Aumento"
+                                    + " de Crédito");
+                        else
+                            System.out.println("Transacción Realizada con éxito");
                         break;
                     case 3:
+                        if ( cliente.getListaUnidades().isEmpty() )
+                            System.out.println("El Cliente no Dispone de Artículos");
+                        else{
+                            cliente.listaUdToString();
+                            System.out.print("Referencia: ");
+                            String ref = br.readLine();
+                            System.out.print("Número de la Unidad: ");
+                            if ( ! cliente.devolver(cliente.getUnidad(ref, Integer.parseInt(br.readLine()))) )
+                                System.out.println("No se ha Podido Completar la Devolución");
+                            else
+                                System.out.println("Devolución Realizada con éxito");
+                        }
+                        break;
+                    case 4:
+                        lista.facCliToString(cliente);
+                        System.out.print("Número de Factura: ");
+                        cliente.pagarFactura(cliente.getFactura(Integer.parseInt(br.readLine())));
                         break;
                     case 0:
                         menuPrincipal();
@@ -461,24 +546,65 @@ public class POO {
         }
     }
     
-    public static void gestionUser() throws IOException{
+    public static void gestionUser(Usuario usuario) throws IOException{
         int opcion;
+        Listar lista = Listar.getIntancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 System.out.println("+----- GESTION DE USUARIO -----+");
-                System.out.println("| 1.       |");
-                System.out.println("| 2.     |");
-                System.out.println("| 3.      |");
+                System.out.println("| 1. Añadir Usuario            |");
+                System.out.println("| 2. Eliminar Usuario          |");
+                System.out.println("| 3. Cambiar Nombre de Usuario |");
+                System.out.println("| 4. Cambiar Contraseña        |");
                 System.out.println("| 0. Volver                    |");
                 System.out.println("+------------------------------+");
                 System.out.print("Introduce un opción: ");
                 opcion = Integer.parseInt(br.readLine());
                 switch (opcion) {
                     case 1:
+                        System.out.print("Nombre de Usuario: ");
+                        String nombre = br.readLine();
+                        if ( lista.isUsuario(nombre) )
+                            System.out.println("El Usuario no es Válido");
+                        else{
+                            System.out.print("Contraseña: ");
+                            String passwd = br.readLine();
+                            new Usuario(nombre, passwd);
+                            System.out.println("Usuario Creado con éxito");
+                        }
                         break;
                     case 2:
+                        System.out.print("Nombre de Usuario: ");
+                        nombre = br.readLine();
+                        if ( ! lista.isUsuario(nombre) || lista.isPoo(nombre) )
+                            System.out.println("El Usuario no Existe o es el Admin");
+                        else{
+                            if ( Listar.listaUsuarios.remove(lista.getUsuario(nombre)) )
+                                System.out.println("Usuario Eliminado con éxito");
+                            else
+                                System.out.println("No se Pudo Eliminar el Usuario");
+                        }
                         break;
                     case 3:
+                        System.out.println("Nombre de Usuario Actual: "+usuario.getNombre());
+                        System.out.print("Nuevo Nombre de Usuario: ");
+                        usuario.setNombre(br.readLine());
+                        System.out.println("Nombre Cambiado con éxito");
+                        break;
+                    case 4:
+                        System.out.print("Introduzca su Antigua Contraseña: ");
+                        if ( br.readLine().equals(usuario.getPasswd()) ){
+                            System.out.print("Introduzcala de Nuevo: ");
+                            if ( br.readLine().equals(usuario.getPasswd()) ){
+                                 System.out.print("Introduzca la Nueva Contraseña: ");
+                                 usuario.setPasswd(br.readLine());
+                                 System.out.println("Contraseña Cambiada con éxito");
+                            }
+                            else
+                                System.out.println("Se ha Equivocado de Contraseña");
+                        }
+                        else
+                            System.out.println("Se ha Equivocado de Contraseña");
                         break;
                     case 0:
                         menuPrincipal();
@@ -492,13 +618,29 @@ public class POO {
     }
     
     public static void logIn() throws IOException{
-        String user;
+        String nombre;
         String passwd;
+        String opcion;
+        Listar lista = Listar.getIntancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.print("Nombre de usuario: ");
-            user = br.readLine();
-            System.out.print("Contraseña: ");
-            passwd = br.readLine();
+            do{
+                System.out.print("Iniciar Sesión? [s,n]: ");
+                opcion = br.readLine();
+            } while ( ! opcion.equalsIgnoreCase("s") && ! opcion.equalsIgnoreCase("n") );
+            if ( opcion.equalsIgnoreCase("n") ){
+                System.out.println("Saliendo");
+                lista.serialize();
+                System.exit(0);
+            }
+            else{
+                do{
+                    System.out.print("Nombre de usuario: ");
+                    nombre = br.readLine();
+                    System.out.print("Contraseña: ");
+                    passwd = br.readLine();
+                } while( ! lista.isUsuario(nombre, passwd) );
+                menuPrincipal();
+            }
             
         }
     }

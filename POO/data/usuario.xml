@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_121" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="poo.Usuario">
+    <void property="nombre">
+     <string>poo</string>
+    </void>
+    <void property="passwd">
+     <string>1234</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

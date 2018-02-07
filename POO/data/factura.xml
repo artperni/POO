@@ -28,11 +28,14 @@
     <void property="descuento">
      <double>0.30000000000000004</double>
     </void>
+    <void property="estadoFactura">
+     <boolean>true</boolean>
+    </void>
     <void property="fecha">
      <object class="java.util.GregorianCalendar">
       <void property="time">
        <object class="java.util.Date">
-        <long>1517924235195</long>
+        <long>1517967029132</long>
        </object>
       </void>
      </object>
@@ -53,7 +56,7 @@
         <void property="estado">
          <object class="java.lang.Enum" id="Estado0" method="valueOf">
           <class>poo.Estado</class>
-          <string>libre</string>
+          <string>vendido</string>
          </object>
         </void>
         <void property="fechaCaducidad">
@@ -82,7 +85,10 @@
             <void method="add">
              <object class="poo.Unidad">
               <void property="estado">
-               <object idref="Estado0"/>
+               <object class="java.lang.Enum" id="Estado1" method="valueOf">
+                <class>poo.Estado</class>
+                <string>libre</string>
+               </object>
               </void>
               <void property="fechaCaducidad">
                <object class="java.util.GregorianCalendar">
@@ -150,7 +156,7 @@
             <void method="add">
              <object class="poo.Unidad">
               <void property="estado">
-               <object idref="Estado0"/>
+               <object idref="Estado1"/>
               </void>
               <void property="fechaCaducidad">
                <object class="java.util.GregorianCalendar">
@@ -190,7 +196,7 @@
      </object>
     </void>
     <void property="observaciones">
-     <string>observaciones</string>
+     <string>Las compras del mes</string>
     </void>
    </object>
   </void>

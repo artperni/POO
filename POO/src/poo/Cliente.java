@@ -87,15 +87,24 @@ public class Cliente {
                 this.codigo+"\tCrédito del cliente: "+this.credito+"€";
     }
     
-    public void devolver(Unidad unidad, Almacen almacen){
-        this.listaUnidades.remove(unidad);
-        almacen.anadir(unidad);
-        /*Se devuelve 3/4 de lo que costó*/
-        this.credito = this.credito + unidad.getProducto().getPrecioVenta() * 0.75;
+    public void listaUdToString(){
+        for (Unidad unidad : this.listaUnidades)
+            System.out.println(unidad.getProducto().toStringRef()+"\t"+unidad.toString());
     }
     
-    public void aumentarCredito(double credito){
+    public boolean devolver(Unidad unidad){
+        this.listaUnidades.remove(unidad);
+        unidad.setEstado(Estado.libre);
+        /*Se devuelve 3/4 de lo que costaba sin descuento*/
+        Double devolucion = unidad.getProducto().getPrecioVenta() * 0.75;
+        this.credito = this.credito + devolucion;
+        Listar.totalVendido -= devolucion;
+        return true;
+    }
+    
+    public boolean aumentarCredito(double credito){
         this.credito = this.credito + credito;
+        return true;
     }
     
     public void comprarUnidad(Unidad unidad){
@@ -103,24 +112,48 @@ public class Cliente {
         unidad.setEstado(Estado.vendido);
     }
     
-    public void comprarUnidad(ArrayList <Unidad> listaUnidades, double precio){
+    public void comprarUnidad(ArrayList <Unidad> listaUnidades){
         for(Unidad unidad : listaUnidades)
             this.comprarUnidad(unidad);
-        this.credito-=precio;
-        Listar.totalVendido = Listar.totalVendido + precio;
     }
     
-    public void facturar(Albaran albaran) throws IOException{
+    public boolean facturar(Albaran albaran) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Listar lista = Listar.getIntancia();
         System.out.print("Forma de Pago: ");
         FormaPago fmpg = FormaPago.valueOf(br.readLine());
         System.out.print("Observaciones de la Factura: ");
-        String obs = br.readLine();
-        if ( lista.getAlbaran(this) != null ){
-            Factura factura = new Factura(obs, fmpg, lista.getAlbaran(this));
-            this.comprarUnidad(factura.listaCompra, factura.importeTotal);
+        Factura factura = new Factura(br.readLine(), fmpg, albaran);
+        if ( factura.importeTotal > this.credito )
+            return false;
+        else{
+            this.comprarUnidad(factura.listaCompra);
+            System.out.println(factura.toString(this));
+            return true;
         }
+    }
+    
+    public boolean pagarFactura(Factura factura){
+        this.credito -= factura.importeTotal;
+        Listar.totalVendido += factura.importeTotal;
+        factura.setEstadoFactura(true);
+        return true;
+    }
+    
+    public Albaran getAlbaran(int numero){
+        Listar lista = Listar.getIntancia();
+        return lista.getAlbaranes(this).get(numero);
+    }
+    
+    public Factura getFactura(int numero){
+        Listar lista = Listar.getIntancia();
+        return lista.getFacturas(this).get(numero);
+    }
+    
+    public Unidad getUnidad(String ref, int numero){
+        for (Unidad unidad : this.listaUnidades)
+            if ( unidad.getProducto().getReferencia().equalsIgnoreCase(ref) )
+                return unidad.getProducto().getUnidad(numero);
+        return null;
     }
 
     

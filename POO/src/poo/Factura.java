@@ -85,5 +85,21 @@ public class Factura
                 "\tLista de la Compra: "+super.listaCompra;
     }
     
+    public String toString(Cliente cliente){
+        String estadoFac;
+        if (isEstadoFactura())
+            estadoFac="Pagada";
+        else
+            estadoFac="No pagada";
+         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setCalendar(this.fecha);
+        return "Fecha creacion de la factura: "+dateFormat.format(this.fecha.getTime())+
+                "\tObservaciones: "+this.getObservaciones()+
+                "\tForma de pago: "+this.getFormaPago().toString()+"\tEstado de la factura: "+
+                estadoFac+"\tImporte total: "+this.importeTotal+"€"+
+                "\tDescuento: "+this.descuento*100+"%"+
+                "\tCrédito Restante del Cliente: "+cliente.getCredito()+"€";
+    }
+    
     
 }

@@ -44,7 +44,7 @@
         <void property="estado">
          <object class="java.lang.Enum" id="Estado0" method="valueOf">
           <class>poo.Estado</class>
-          <string>libre</string>
+          <string>vendido</string>
          </object>
         </void>
         <void property="fechaCaducidad">
@@ -73,7 +73,10 @@
             <void method="add">
              <object class="poo.Unidad">
               <void property="estado">
-               <object idref="Estado0"/>
+               <object class="java.lang.Enum" id="Estado1" method="valueOf">
+                <class>poo.Estado</class>
+                <string>libre</string>
+               </object>
               </void>
               <void property="fechaCaducidad">
                <object class="java.util.GregorianCalendar">
@@ -141,7 +144,7 @@
             <void method="add">
              <object class="poo.Unidad">
               <void property="estado">
-               <object idref="Estado0"/>
+               <object idref="Estado1"/>
               </void>
               <void property="fechaCaducidad">
                <object class="java.util.GregorianCalendar">
@@ -223,7 +226,7 @@
       <void method="add">
        <object class="poo.Unidad" id="Unidad2">
         <void property="estado">
-         <object idref="Estado0"/>
+         <object idref="Estado1"/>
         </void>
         <void property="fechaCaducidad">
          <object class="java.util.GregorianCalendar">
@@ -254,7 +257,7 @@
             <void method="add">
              <object class="poo.Unidad">
               <void property="estado">
-               <object idref="Estado0"/>
+               <object idref="Estado1"/>
               </void>
               <void property="fechaCaducidad">
                <object class="java.util.GregorianCalendar">
@@ -291,7 +294,7 @@
       <void method="add">
        <object class="poo.Unidad" id="Unidad3">
         <void property="estado">
-         <object idref="Estado0"/>
+         <object idref="Estado1"/>
         </void>
         <void property="fechaCaducidad">
          <object class="java.util.GregorianCalendar">
@@ -341,6 +344,151 @@
     </void>
     <void property="numeroAlbaran">
      <int>1</int>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="poo.Albaran">
+    <void property="cliente">
+     <object class="poo.Cliente">
+      <void property="codigo">
+       <string>48576822YAlejandro Maestro</string>
+      </void>
+      <void property="credito">
+       <double>1328.3</double>
+      </void>
+      <void property="direccion">
+       <string>Calle Pelícano nº7</string>
+      </void>
+      <void property="listaUnidades">
+       <object class="java.util.ArrayList">
+        <void method="add">
+         <object idref="Unidad0"/>
+        </void>
+        <void method="add">
+         <object idref="Unidad1"/>
+        </void>
+       </object>
+      </void>
+      <void property="nif">
+       <string>48576822Y</string>
+      </void>
+      <void property="nombre">
+       <string>Alejandro Maestro</string>
+      </void>
+     </object>
+    </void>
+    <void property="fecha">
+     <object class="java.util.GregorianCalendar">
+      <void property="time">
+       <object class="java.util.Date">
+        <long>1517967191929</long>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void property="importeTotal">
+     <double>300.0</double>
+    </void>
+    <void property="listaCompra">
+     <object class="java.util.ArrayList">
+      <void method="add">
+       <object class="poo.Unidad" id="Unidad4">
+        <void property="estado">
+         <object class="java.lang.Enum" id="Estado2" method="valueOf">
+          <class>poo.Estado</class>
+          <string>reservado</string>
+         </object>
+        </void>
+        <void property="fechaCaducidad">
+         <object class="java.util.GregorianCalendar">
+          <void property="time">
+           <object class="java.util.Date">
+            <long>1525644000000</long>
+           </object>
+          </void>
+         </object>
+        </void>
+        <void property="producto">
+         <object class="poo.Producto" id="Producto3">
+          <void property="dimensiones">
+           <object class="poo.Dimensiones">
+            <void property="altura">
+             <double>75.0</double>
+            </void>
+            <void property="ancho">
+             <double>52.0</double>
+            </void>
+           </object>
+          </void>
+          <void property="listaUnidades">
+           <object class="java.util.ArrayList">
+            <void method="add">
+             <object idref="Unidad4"/>
+            </void>
+            <void method="add">
+             <object class="poo.Unidad" id="Unidad5">
+              <void property="estado">
+               <object idref="Estado2"/>
+              </void>
+              <void property="fechaCaducidad">
+               <object class="java.util.GregorianCalendar">
+                <void property="time">
+                 <object class="java.util.Date">
+                  <long>1567980000000</long>
+                 </object>
+                </void>
+               </object>
+              </void>
+              <void property="producto">
+               <object idref="Producto3"/>
+              </void>
+             </object>
+            </void>
+            <void method="add">
+             <object class="poo.Unidad">
+              <void property="estado">
+               <object idref="Estado1"/>
+              </void>
+              <void property="fechaCaducidad">
+               <object class="java.util.GregorianCalendar">
+                <void property="time">
+                 <object class="java.util.Date">
+                  <long>1712181600000</long>
+                 </object>
+                </void>
+               </object>
+              </void>
+              <void property="producto">
+               <object idref="Producto3"/>
+              </void>
+             </object>
+            </void>
+           </object>
+          </void>
+          <void property="precioCompra">
+           <double>100.0</double>
+          </void>
+          <void property="precioVenta">
+           <double>150.0</double>
+          </void>
+          <void property="referencia">
+           <string>SE003</string>
+          </void>
+          <void property="stock">
+           <int>3</int>
+          </void>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object idref="Unidad5"/>
+      </void>
+     </object>
+    </void>
+    <void property="numeroAlbaran">
+     <int>2</int>
     </void>
    </object>
   </void>
