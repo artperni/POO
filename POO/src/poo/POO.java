@@ -28,7 +28,7 @@ Este usuario además no se puede borrar
 public class POO {
 
     public static void main(String[] args) throws IOException{
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         lista.deserialize();
         logIn();
     }
@@ -38,7 +38,7 @@ public class POO {
     
     public static void menuPrincipal() throws IOException{
         int opcion;
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 System.out.println("+-------- MENU PRINCIPAL --------+");
@@ -113,7 +113,7 @@ public class POO {
     }
     
     public static void creacionAlmacen() throws IOException{
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         lista.almCodToString();
         System.out.print("Código del Almacén: ");
@@ -128,7 +128,7 @@ public class POO {
     }
     
     public static void eliminacionAlmacen() throws IOException{
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         lista.almCodToString();
         System.out.print("Código del Almacén: ");
@@ -143,7 +143,7 @@ public class POO {
     }
     
     public static void creacionCliente() throws IOException{
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         lista.cliToString();
         System.out.print("Nombre del Cliente: ");
@@ -167,7 +167,7 @@ public class POO {
     }
     
     public static void eliminacionCliente() throws IOException{
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         lista.cliToString();
         System.out.print("Nombre o Dni del Cliente: ");
@@ -183,7 +183,7 @@ public class POO {
     
     public static void gestionAlm(Almacen almacen) throws IOException{
         int opcion;
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 System.out.println("+----------------- GESTION DE ALMACENES -----------------+");
@@ -325,7 +325,7 @@ public class POO {
     
     public static void gestionCli(Cliente cliente) throws IOException{
         int opcion;
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 System.out.println("+-------- GESTION DE CLIENTES --------+");
@@ -425,7 +425,7 @@ public class POO {
     
     public static void listadoPro() throws IOException{
         int opcion;
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 System.out.println("+--------------------- LISTADO DE PRODUCTOS ---------------------+");
@@ -469,7 +469,7 @@ public class POO {
     
     public static void listadoAlb() throws IOException, ArrayIndexOutOfBoundsException{
         int opcion;
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 System.out.println("+----------------- LISTADO DE ALBARANES -----------------+");
@@ -515,7 +515,7 @@ public class POO {
     
     public static void listadoFac() throws IOException{
         int opcion;
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 System.out.println("+------------ LISTADO DE FACTURAS ------------+");
@@ -548,7 +548,7 @@ public class POO {
     
     public static void gestionUser(Usuario usuario) throws IOException{
         int opcion;
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do {
                 System.out.println("+----- GESTION DE USUARIO -----+");
@@ -621,7 +621,7 @@ public class POO {
         String nombre;
         String passwd;
         String opcion;
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
             do{
                 System.out.print("Iniciar Sesión? [s,n]: ");

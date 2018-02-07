@@ -3,17 +3,16 @@ package poo;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
-import java.util.ArrayList;
 
-public class UsuarioDAC 
+public class ProyectDAC 
         implements IPersistence, Serializable {
 
     @Override
-    public boolean xmlSerialize(ArrayList listObj) {
+    public boolean xmlSerialize(Object listObj, String path) {
         boolean ok = false;
         XMLEncoder xmle;
         try{
-            xmle = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(USR_SERIALIZE)));
+            xmle = new XMLEncoder(new BufferedOutputStream(new FileOutputStream(path)));
         }
         catch(FileNotFoundException fnf){
             System.out.println("Error creando o abriendo el fichero: "+fnf.getMessage());
@@ -26,15 +25,15 @@ public class UsuarioDAC
     }
 
     @Override
-    public ArrayList xmlDeserialize() {
+    public Object xmlDeserialize(String path) {
         XMLDecoder xmld=null;
         try{
-            xmld = new XMLDecoder(new BufferedInputStream(new FileInputStream(USR_SERIALIZE)));
+            xmld = new XMLDecoder(new BufferedInputStream(new FileInputStream(path)));
         }
         catch(FileNotFoundException fnf){
             System.out.println("Error creando o abriendo el fichero: "+fnf.getMessage());
 	}
-        return (ArrayList <Usuario>)xmld.readObject();
+        return xmld.readObject();
     }
     
 }

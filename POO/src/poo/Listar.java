@@ -12,23 +12,13 @@ public class Listar {
     public static ArrayList <Cliente> listaClientes = new ArrayList<>();
     public static ArrayList <Usuario> listaUsuarios = new ArrayList<>();
     private static Listar unicaInstancia = null;
-    private final IPersistence dacAlb;
-    private final IPersistence dacAlm;
-    private final IPersistence dacCli;
-    private final IPersistence dacFac;
-    private final IPersistence dacPro;
-    private final IPersistence dacUsr;
+    private final IPersistence dac;
 
     private Listar() {
-        dacAlb = new AlbaranDAC();
-        dacAlm = new AlmacenDAC();
-        dacCli = new ClienteDAC();
-        dacFac = new FacturaDAC();
-        dacPro = new ProductoDAC();
-        dacUsr = new UsuarioDAC();
+        dac = new ProyectDAC();
     }
     
-    public static Listar getIntancia(){
+    public static Listar getInstancia(){
         if (unicaInstancia == null)
             unicaInstancia = new Listar();
         return unicaInstancia;
@@ -226,27 +216,30 @@ public class Listar {
     
     
     public void deserialize(){
-        listaAlbaranes = dacAlb.xmlDeserialize();
-        listaAlmacenes = dacAlm.xmlDeserialize();
-        listaClientes = dacCli.xmlDeserialize();
-        listaFacturas = dacFac.xmlDeserialize();
-        listaProductosTotal = dacPro.xmlDeserialize();
-        listaUsuarios = dacUsr.xmlDeserialize();
+        listaAlbaranes = (ArrayList <Albaran>)dac.xmlDeserialize(IPersistence.ALB_SERIALIZE);
+        listaAlmacenes = (ArrayList <Almacen>)dac.xmlDeserialize(IPersistence.ALM_SERIALIZE);
+        listaClientes = (ArrayList <Cliente>)dac.xmlDeserialize(IPersistence.CLI_SERIALIZE);
+        listaFacturas = (ArrayList <Factura>)dac.xmlDeserialize(IPersistence.FAC_SERIALIZE);
+        listaProductosTotal = (ArrayList <Producto>)dac.xmlDeserialize(IPersistence.PRO_SERIALIZE);
+        listaUsuarios = (ArrayList <Usuario>)dac.xmlDeserialize(IPersistence.USR_SERIALIZE);
+        totalVendido = (Double)dac.xmlDeserialize(IPersistence.VEN_SERIALIZE);
     }
     
     public void serialize(){
-        if( ! this.dacAlb.xmlSerialize(listaAlbaranes) )
+        if( ! this.dac.xmlSerialize(listaAlbaranes, IPersistence.ALB_SERIALIZE) )
             System.out.println("Error serializando los albaranes");
-        if( ! this.dacAlm.xmlSerialize(listaAlmacenes) )
+        if( ! this.dac.xmlSerialize(listaAlmacenes, IPersistence.ALM_SERIALIZE) )
             System.out.println("Error serializando los almacenes");
-        if( ! this.dacCli.xmlSerialize(listaClientes) )
+        if( ! this.dac.xmlSerialize(listaClientes,IPersistence.CLI_SERIALIZE) )
             System.out.println("Error serializando los clientes");
-        if( ! this.dacFac.xmlSerialize(listaFacturas) )
+        if( ! this.dac.xmlSerialize(listaFacturas,IPersistence.FAC_SERIALIZE) )
             System.out.println("Error serializando las facturas");
-        if( ! this.dacPro.xmlSerialize(listaProductosTotal) )
+        if( ! this.dac.xmlSerialize(listaProductosTotal,IPersistence.PRO_SERIALIZE) )
             System.out.println("Error serializando los productos");
-        if( ! this.dacUsr.xmlSerialize(listaUsuarios) )
+        if( ! this.dac.xmlSerialize(listaUsuarios,IPersistence.USR_SERIALIZE) )
             System.out.println("Error serializando los usuarios");
+        if( ! this.dac.xmlSerialize(totalVendido,IPersistence.VEN_SERIALIZE) )
+            System.out.println("Error serializando el total vendido");
     }
     
     

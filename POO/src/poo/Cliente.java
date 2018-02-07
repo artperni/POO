@@ -140,12 +140,12 @@ public class Cliente {
     }
     
     public Albaran getAlbaran(int numero){
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         return lista.getAlbaranes(this).get(numero);
     }
     
     public Factura getFactura(int numero){
-        Listar lista = Listar.getIntancia();
+        Listar lista = Listar.getInstancia();
         return lista.getFacturas(this).get(numero);
     }
     
